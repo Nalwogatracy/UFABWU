@@ -1,0 +1,3944 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UFABWU · Uganda Farm & Agro-Based Workers’ Union</title>
+  <meta name="description" content="Official enterprise portal of Uganda Farm & Agro-Based Workers' Union (UFABWU - LUN 38). Organizing, advocating, and defending agricultural workers across Uganda since 2006.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      /* Brand Color Palette */
+      --primary-dark: #092317;
+      --primary-main: #12402B;
+      --primary-light: #1D6343;
+      --accent-gold: #D8AA35;
+      --accent-gold-hover: #C29629;
+      --accent-emerald: #10B981;
+      --accent-glow: rgba(216, 170, 53, 0.25);
+      
+      /* Light Mode Tokens */
+      --bg-body: #F4F7F4;
+      --bg-surface: #FFFFFF;
+      --bg-card: rgba(255, 255, 255, 0.88);
+      --bg-glass: rgba(255, 255, 255, 0.75);
+      --bg-header: rgba(9, 35, 23, 0.94);
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --border-subtle: rgba(18, 64, 43, 0.12);
+      --border-glass: rgba(255, 255, 255, 0.4);
+      --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 30px rgba(9, 35, 23, 0.08);
+      --shadow-lg: 0 20px 45px rgba(9, 35, 23, 0.15);
+      --shadow-glow: 0 0 35px rgba(216, 170, 53, 0.3);
+
+      /* Layout */
+      --radius-sm: 10px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+      --radius-full: 9999px;
+      --max-width: 1280px;
+      --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      /* Dark Mode Tokens */
+      --bg-body: #06110B;
+      --bg-surface: #0C1D14;
+      --bg-card: rgba(14, 30, 21, 0.85);
+      --bg-glass: rgba(12, 29, 20, 0.8);
+      --bg-header: rgba(4, 14, 9, 0.96);
+      --text-primary: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-glass: rgba(255, 255, 255, 0.08);
+      --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 35px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Reset & Global Elements */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text-primary);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    /* Ambient Dynamic Background Glows */
+    .ambient-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .ambient-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.22;
+      animation: floatPulse 18s ease-in-out infinite alternate;
+    }
+
+    .glow-1 {
+      width: 500px;
+      height: 500px;
+      background: #12402B;
+      top: -100px;
+      left: -100px;
+    }
+
+    .glow-2 {
+      width: 450px;
+      height: 450px;
+      background: var(--accent-gold);
+      bottom: 10%;
+      right: -100px;
+      animation-delay: -6s;
+    }
+
+    .glow-3 {
+      width: 350px;
+      height: 350px;
+      background: #10B981;
+      top: 40%;
+      left: 30%;
+      animation-delay: -12s;
+      opacity: 0.15;
+    }
+
+    @keyframes floatPulse {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -30px) scale(1.1); }
+      100% { transform: translate(-30px, 40px) scale(0.95); }
+    }
+
+    /* Layout Containers */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Dynamic Glass Card Utility */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .glass-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(216, 170, 53, 0.3);
+    }
+
+    /* ==========================================================================
+       2. NAVIGATION, TOP BAR & MULTI-LANGUAGE SELECTOR
+       ========================================================================== */
+    .top-announcement {
+      background: linear-gradient(90deg, #092317 0%, #12402B 50%, #092317 100%);
+      color: #F8FAFC;
+      font-size: 0.85rem;
+      padding: 0.45rem 1rem;
+      border-bottom: 1px solid rgba(216, 170, 53, 0.2);
+    }
+
+    .top-announcement-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .top-announcement .badge {
+      background: var(--accent-gold);
+      color: #092317;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      margin-right: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .lang-selector {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .lang-selector option {
+      background: #092317;
+      color: #FFF;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg-header);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      gap: 12px;
+      min-height: 76px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #B88E22 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #092317;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 15px rgba(216, 170, 53, 0.35);
+    }
+
+    .brand-title-sub {
+      display: block;
+      font-size: 0.75rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      color: var(--accent-gold);
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      list-style: none;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow-x: auto;
+      padding-bottom: 0.2rem;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .nav-menu::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-item-link {
+      padding: 0.45rem 0.75rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 600;
+      font-size: 0.84rem;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-width: max-content;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-item-link:hover, .nav-item-link.active {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .nav-item-link.active {
+      background: var(--accent-gold);
+      color: #092317;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(216, 170, 53, 0.35);
+    }
+
+    /* Sticky All-Tabs Interactive Ribbon */
+    .tabs-navigation-wrapper {
+      position: sticky;
+      top: 76px;
+      z-index: 990;
+      background: var(--bg-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.65rem 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .tabs-nav-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tab-scroll-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      z-index: 2;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .tab-scroll-btn:hover {
+      background: var(--accent-gold);
+      color: #092317;
+      border-color: var(--accent-gold);
+      transform: scale(1.08);
+      box-shadow: 0 4px 15px rgba(216, 170, 53, 0.4);
+    }
+
+    .tabs-scroll-container {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      padding: 0.2rem 0.2rem;
+      flex: 1;
+    }
+
+    .tabs-scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-tab-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.52rem 1.05rem;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .nav-tab-pill:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-gold);
+      background: rgba(216, 170, 53, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .nav-tab-pill.active {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #C29629 100%);
+      color: #092317;
+      border-color: var(--accent-gold);
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(216, 170, 53, 0.38);
+    }
+
+    .nav-tab-pill .tab-badge {
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: rgba(9, 35, 23, 0.12);
+      color: #092317;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-tab-pill.active .tab-badge {
+      background: #092317;
+      color: var(--accent-gold);
+    }
+
+    .nav-tab-pill .tab-badge.badge-new {
+      background: #10B981;
+      color: #FFFFFF;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 0 0 auto;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .icon-btn:hover {
+      background: var(--accent-gold);
+      color: #092317;
+      border-color: var(--accent-gold);
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 310px;
+      height: 100vh;
+      background: var(--primary-dark);
+      z-index: 2000;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+      overflow-y: auto;
+    }
+
+    .mobile-drawer.open {
+      right: 0;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ==========================================================================
+       3. BUTTONS, BADGES & FORM INPUTS
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0.85rem 1.8rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #C29629 100%);
+      color: #092317;
+      box-shadow: 0 8px 25px rgba(216, 170, 53, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(216, 170, 53, 0.45);
+      background: linear-gradient(135deg, #E5B742 0%, #D8AA35 100%);
+    }
+
+    .btn-secondary {
+      background: var(--primary-main);
+      color: #FFFFFF;
+      box-shadow: 0 8px 25px rgba(18, 64, 43, 0.25);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      color: #FFFFFF;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      background: rgba(216, 170, 53, 0.05);
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.4rem 1rem;
+      background: rgba(216, 170, 53, 0.12);
+      border: 1px solid rgba(216, 170, 53, 0.3);
+      color: var(--accent-gold);
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Form inputs */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      font-size: 0.92rem;
+      color: var(--text-primary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-size: 0.98rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    /* ==========================================================================
+       4. PARTNERS & AFFILIATES MARQUEE
+       ========================================================================== */
+    .marquee-container {
+      background: var(--primary-dark);
+      padding: 1.5rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      gap: 3rem;
+      animation: marqueeScroll 25s linear infinite;
+    }
+
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .partner-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.85);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .partner-item i {
+      color: var(--accent-gold);
+      font-size: 1.2rem;
+    }
+
+    /* ==========================================================================
+       5. HISTORICAL TIMELINE STYLES
+       ========================================================================== */
+    .timeline-container {
+      position: relative;
+      padding-left: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 12px;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--accent-gold) 0%, var(--primary-main) 100%);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.5rem;
+      top: 4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      border: 4px solid var(--bg-surface);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .timeline-year {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      margin-bottom: 0.2rem;
+    }
+
+    /* ==========================================================================
+       6. SECTIONS & PAGES
+       ========================================================================== */
+    .page-section {
+      display: none;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      padding: 3rem 0;
+    }
+
+    .page-section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem auto;
+    }
+
+    .section-subtitle {
+      color: var(--accent-gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: 2.4rem;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    /* ==========================================================================
+       7. HERO & ADMINISTRATORS SECTION
+       ========================================================================== */
+    .hero-wrapper {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      background: linear-gradient(135deg, rgba(9,35,23,0.92) 0%, rgba(18,64,43,0.85) 100%),
+                  url('images/ufabwu_hero_bg.jpg') center/cover no-repeat;
+      color: #FFFFFF;
+      padding: 4.5rem 3.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 3.3rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(120deg, var(--accent-gold) 0%, #F3D279 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: 2rem;
+      max-width: 90%;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Administrators Cards */
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .admin-card {
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admin-avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.25rem auto;
+      border: 3px solid var(--accent-gold);
+      box-shadow: 0 8px 25px rgba(216, 170, 53, 0.25);
+    }
+
+    .admin-name {
+      font-size: 1.35rem;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .admin-role {
+      color: var(--accent-gold);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .admin-bio {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Hero Stats Card */
+    .hero-stats-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-box {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      padding: 2.2rem;
+    }
+
+    .feature-icon-wrap {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: rgba(216, 170, 53, 0.12);
+      border: 1px solid rgba(216, 170, 53, 0.3);
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .feature-title {
+      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .feature-text {
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+    }
+
+    /* ==========================================================================
+       8. INTERACTIVE DYNAMIC TOOLS
+       ========================================================================== */
+    
+    /* A. Branch Directory */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip-btn {
+      padding: 0.55rem 1.2rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .chip-btn:hover, .chip-btn.active {
+      background: var(--primary-main);
+      color: #FFFFFF;
+      border-color: var(--primary-main);
+    }
+
+    .chip-btn.active {
+      background: var(--accent-gold);
+      color: #092317;
+      border-color: var(--accent-gold);
+    }
+
+    .branch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .branch-card {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .branch-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .branch-tag {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #10B981;
+      font-weight: 700;
+    }
+
+    /* B. Dues Calculator */
+    .calculator-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      padding: 3rem;
+    }
+
+    .calc-result-card {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 100%);
+      color: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .calc-amount {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      margin: 0.5rem 0;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.95rem;
+    }
+
+    .benefit-item i {
+      color: var(--accent-gold);
+    }
+
+    /* C. Digital ID Generator / Join Form */
+    .wizard-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .wizard-steps::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--border-subtle);
+      z-index: 1;
+      transform: translateY(-50%);
+    }
+
+    .step-node {
+      position: relative;
+      z-index: 2;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-subtle);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .step-node.active {
+      border-color: var(--accent-gold);
+      background: var(--accent-gold);
+      color: #092317;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .step-node.completed {
+      border-color: var(--primary-main);
+      background: var(--primary-main);
+      color: #FFFFFF;
+    }
+
+    /* Digital Card Graphic */
+    .id-card-preview {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #092317 0%, #164E33 100%);
+      border: 2px solid var(--accent-gold);
+      border-radius: 20px;
+      padding: 1.8rem;
+      color: #FFFFFF;
+      box-shadow: var(--shadow-lg), 0 0 30px rgba(216, 170, 53, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .id-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(216, 170, 53, 0.3);
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .id-card-photo-placeholder {
+      width: 80px;
+      height: 80px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1.5px dashed var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--accent-gold);
+    }
+
+    /* D. Gallery & Lightbox */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 240px;
+      cursor: pointer;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(9, 35, 23, 0.9) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem;
+      color: #FFFFFF;
+      opacity: 0.9;
+      transition: var(--transition);
+    }
+
+    /* E. FLOATING CHATBOT HELPDESK WIDGET */
+    .chat-fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 3000;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #C29629 100%);
+      color: #092317;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(216, 170, 53, 0.4);
+      transition: var(--transition);
+    }
+
+    .chat-fab:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .chat-box-window {
+      position: fixed;
+      bottom: 6rem;
+      right: 2rem;
+      z-index: 3000;
+      width: 360px;
+      height: 480px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-box-window.open {
+      display: flex;
+    }
+
+    .chat-header {
+      background: var(--primary-dark);
+      color: #FFFFFF;
+      padding: 1rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .chat-msg {
+      max-width: 80%;
+      padding: 0.75rem 1rem;
+      border-radius: 16px;
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+
+    .chat-msg.bot {
+      background: rgba(18, 64, 43, 0.1);
+      color: var(--text-primary);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-msg.user {
+      background: var(--primary-main);
+      color: #FFFFFF;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-footer {
+      padding: 0.8rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 8px;
+    }
+
+    .chat-footer input {
+      flex: 1;
+      padding: 0.6rem 0.9rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+      outline: none;
+      font-size: 0.88rem;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 3500;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 50px rgba(0,0,0,0.8);
+    }
+
+    /* Spotlight Search Modal (Ctrl + K) */
+    .search-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 3800;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 10vh;
+    }
+
+    .search-modal.active {
+      display: flex;
+    }
+
+    .search-box-card {
+      width: 100%;
+      max-width: 650px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 12px;
+    }
+
+    .search-input-wrap input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+    }
+
+    .search-input-wrap input:focus {
+      outline: none;
+    }
+
+    .search-results-list {
+      max-height: 380px;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .search-result-item {
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .search-result-item:hover {
+      background: rgba(216, 170, 53, 0.1);
+      color: var(--accent-gold);
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 4000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: var(--primary-dark);
+      color: #FFFFFF;
+      padding: 0.9rem 1.4rem;
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--accent-gold);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: slideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary-dark);
+      color: #94A3B8;
+      padding: 4rem 0 2rem;
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-title {
+      color: #FFFFFF;
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 992px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .calculator-box { grid-template-columns: 1fr; padding: 1.8rem; }
+      .contact-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .map-container-box { grid-template-columns: 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-menu { display: none; }
+      .mobile-menu-toggle { display: flex; }
+      .hero-title { font-size: 2.5rem; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-container { justify-content: space-between; }
+      .nav-actions { margin-left: auto; }
+    }
+
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-wrapper { padding: 2.5rem 1.5rem; }
+      .hero-stats-card { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2rem; }
+      .chat-box-window { width: 90vw; right: 5vw; }
+      .nav-menu { gap: 0.3rem; }
+      .nav-item-link { padding: 0.55rem 0.7rem; font-size: 0.85rem; }
+    }
+
+    /* --------------------------------------------------------------------------
+       HERO SLIDER STYLES
+       -------------------------------------------------------------------------- */
+    .hero-slider-container {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: var(--primary-dark);
+      min-height: 520px;
+    }
+
+    .hero-slide {
+      display: none;
+      padding: 4.5rem 3.5rem;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 0.6s ease;
+      min-height: 520px;
+    }
+
+    .hero-slide.active {
+      display: block;
+      animation: fadeInSlide 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: scale(1.02); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .slider-arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(9, 35, 23, 0.75);
+      border: 1.5px solid rgba(216, 170, 53, 0.5);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+
+    .slider-arrow-btn:hover {
+      background: var(--accent-gold);
+      color: #092317;
+      border-color: var(--accent-gold);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 0 20px rgba(216, 170, 53, 0.5);
+    }
+
+    .slider-prev-btn { left: 1.2rem; }
+    .slider-next-btn { right: 1.2rem; }
+
+    .slider-dots-bar {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 10;
+      background: rgba(9, 35, 23, 0.75);
+      backdrop-filter: blur(12px);
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .slider-dot.active {
+      width: 28px;
+      border-radius: 12px;
+      background: var(--accent-gold);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* --------------------------------------------------------------------------
+       VIDEO GALLERY & LIGHTBOX STYLES
+       -------------------------------------------------------------------------- */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .video-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-gold);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .video-thumb-wrap {
+      position: relative;
+      width: 100%;
+      height: 210px;
+      overflow: hidden;
+    }
+
+    .video-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .video-card:hover .video-thumb-wrap img {
+      transform: scale(1.08);
+    }
+
+    .play-btn-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(9, 35, 23, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .play-icon-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #C29629 100%);
+      color: #092317;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      padding-left: 4px;
+      box-shadow: 0 0 25px rgba(216, 170, 53, 0.6);
+      transition: var(--transition);
+    }
+
+    .video-card:hover .play-icon-circle {
+      transform: scale(1.15);
+      background: #FFFFFF;
+      color: #092317;
+    }
+
+    .video-duration-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.85);
+      color: #FFFFFF;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    /* --------------------------------------------------------------------------
+       SOCIAL MEDIA FEED STYLES
+       -------------------------------------------------------------------------- */
+    .social-feed-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .social-card {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .social-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .social-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .social-icon-box.twitter { background: #1DA1F2; }
+    .social-icon-box.facebook { background: #1877F2; }
+    .social-icon-box.linkedin { background: #0A66C2; }
+
+    /* --------------------------------------------------------------------------
+       INTERACTIVE MAP & BRANCH LOCATIONS STYLES
+       -------------------------------------------------------------------------- */
+    .map-container-box {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      padding: 2.2rem;
+    }
+
+    .map-vector-graphic {
+      position: relative;
+      width: 100%;
+      min-height: 400px;
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at 50% 50%, #0D2D1E 0%, #05140C 100%);
+      border: 1.5px solid var(--border-subtle);
+      overflow: hidden;
+    }
+
+    .map-pin {
+      position: absolute;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: var(--transition);
+      z-index: 5;
+    }
+
+    .map-pin:hover, .map-pin.active {
+      transform: scale(1.28);
+      z-index: 10;
+    }
+
+    .map-pin-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      color: #092317;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 0 18px var(--accent-glow);
+    }
+
+    .map-pin.active .map-pin-icon {
+      background: #10B981;
+      color: #FFF;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.7);
+    }
+
+    .map-pin-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF;
+      background: rgba(9, 35, 23, 0.9);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-top: 5px;
+      white-space: nowrap;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Video Lightbox Modal */
+    .video-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 4000;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .video-modal-backdrop.active {
+      display: flex;
+    }
+
+    .video-modal-card {
+      width: 100%;
+      max-width: 850px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+      border: 1px solid var(--border-subtle);
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Ambient Glows -->
+  <div class="ambient-bg">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+  </div>
+
+  <!-- Announcement Bar & Multi-Language Selector -->
+  <div class="top-announcement">
+    <div class="container top-announcement-container">
+      <div>
+        <span class="badge">Official Enterprise Union Portal</span>
+        Registered <strong>LUN 38</strong> · Empowering 10,000+ agricultural workers across Uganda
+      </div>
+      <div>
+        <i class="fas fa-globe" style="color: var(--accent-gold); margin-right: 4px;"></i>
+        <select class="lang-selector" id="languageSelector" onchange="changeLanguage(this.value)">
+          <option value="en">English (Official)</option>
+          <option value="lg">Luganda (Ekibiina)</option>
+          <option value="sw">Kiswahili (Muungano)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" onclick="navigateTo('home')">
+        <div class="logo-icon-wrap">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <div>
+          UFABWU
+          <span class="brand-title-sub">Uganda Agro-Workers Union</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu (All 12 Tabs Accessible) -->
+      <ul class="nav-menu">
+        <li><a href="#home" class="nav-item-link active" data-page="home" onclick="navigateTo('home')"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#about" class="nav-item-link" data-page="about" onclick="navigateTo('about')"><i class="fas fa-landmark"></i> About</a></li>
+        <li><a href="#branches" class="nav-item-link" data-page="branches" onclick="navigateTo('branches')"><i class="fas fa-map-marked-alt"></i> Branches</a></li>
+        <li><a href="#grievance" class="nav-item-link" data-page="grievance" onclick="navigateTo('grievance')"><i class="fas fa-balance-scale"></i> Dispute Intake</a></li>
+        <li><a href="#resources" class="nav-item-link" data-page="resources" onclick="navigateTo('resources')"><i class="fas fa-file-pdf"></i> Downloads</a></li>
+        <li><a href="#perks" class="nav-item-link" data-page="perks" onclick="navigateTo('perks')"><i class="fas fa-hand-holding-usd"></i> SACCO Perks</a></li>
+        <li><a href="#events" class="nav-item-link" data-page="events" onclick="navigateTo('events')"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="#calculator" class="nav-item-link" data-page="calculator" onclick="navigateTo('calculator')"><i class="fas fa-calculator"></i> Calculator</a></li>
+        <li><a href="#join" class="nav-item-link" data-page="join" onclick="navigateTo('join')"><i class="fas fa-user-plus"></i> Digital ID</a></li>
+        <li><a href="#news" class="nav-item-link" data-page="news" onclick="navigateTo('news')"><i class="fas fa-newspaper"></i> News</a></li>
+        <li><a href="#gallery" class="nav-item-link" data-page="gallery" onclick="navigateTo('gallery')"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="#faq" class="nav-item-link" data-page="faq" onclick="navigateTo('faq')"><i class="fas fa-question-circle"></i> FAQ</a></li>
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="nav-actions">
+        <button class="icon-btn" id="openSearchBtn" title="Search site (Ctrl + K)" aria-label="Search">
+          <i class="fas fa-search"></i>
+        </button>
+        <button class="icon-btn" id="themeToggleBtn" title="Toggle theme" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="icon-btn mobile-menu-toggle" id="mobileMenuBtn" aria-label="Open mobile menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- STICKY ALL-TABS INTERACTIVE NAVIGATION RIBBON -->
+  <div class="tabs-navigation-wrapper">
+    <div class="container tabs-nav-inner">
+      <button class="tab-scroll-btn" id="scrollTabsLeft" onclick="scrollTabs(-1)" title="Scroll tabs left" aria-label="Scroll tabs left">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      
+      <div class="tabs-scroll-container" id="tabsScrollContainer">
+        <a href="#home" class="nav-tab-pill active" data-page="home" onclick="navigateTo('home')">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <a href="#about" class="nav-tab-pill" data-page="about" onclick="navigateTo('about')">
+          <i class="fas fa-landmark"></i> Background & Leadership
+        </a>
+        <a href="#branches" class="nav-tab-pill" data-page="branches" onclick="navigateTo('branches')">
+          <i class="fas fa-map-marked-alt"></i> Branch Directory <span class="tab-badge">50+</span>
+        </a>
+        <a href="#grievance" class="nav-tab-pill" data-page="grievance" onclick="navigateTo('grievance')">
+          <i class="fas fa-balance-scale"></i> Report Dispute
+        </a>
+        <a href="#resources" class="nav-tab-pill" data-page="resources" onclick="navigateTo('resources')">
+          <i class="fas fa-file-pdf"></i> Downloads <span class="tab-badge">PDF</span>
+        </a>
+        <a href="#perks" class="nav-tab-pill" data-page="perks" onclick="navigateTo('perks')">
+          <i class="fas fa-hand-holding-usd"></i> Welfare & SACCO
+        </a>
+        <a href="#events" class="nav-tab-pill" data-page="events" onclick="navigateTo('events')">
+          <i class="fas fa-calendar-alt"></i> Events Calendar
+        </a>
+        <a href="#calculator" class="nav-tab-pill" data-page="calculator" onclick="navigateTo('calculator')">
+          <i class="fas fa-calculator"></i> Dues Calculator
+        </a>
+        <a href="#join" class="nav-tab-pill" data-page="join" onclick="navigateTo('join')">
+          <i class="fas fa-user-plus"></i> Digital ID Card
+        </a>
+        <a href="#news" class="nav-tab-pill" data-page="news" onclick="navigateTo('news')">
+          <i class="fas fa-newspaper"></i> News & Victories <span class="tab-badge badge-new">NEW</span>
+        </a>
+        <a href="#gallery" class="nav-tab-pill" data-page="gallery" onclick="navigateTo('gallery')">
+          <i class="fas fa-images"></i> Media Gallery
+        </a>
+        <a href="#faq" class="nav-tab-pill" data-page="faq" onclick="navigateTo('faq')">
+          <i class="fas fa-question-circle"></i> FAQ & Help
+        </a>
+      </div>
+
+      <button class="tab-scroll-btn" id="scrollTabsRight" onclick="scrollTabs(1)" title="Scroll tabs right" aria-label="Scroll tabs right">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="brand-logo">
+        <div class="logo-icon-wrap"><i class="fas fa-seedling"></i></div>
+        <span>UFABWU</span>
+      </div>
+      <button class="icon-btn" id="closeDrawerBtn"><i class="fas fa-times"></i></button>
+    </div>
+    <ul style="list-style:none; display:flex; flex-direction:column; gap:0.8rem; margin-top:1rem;">
+      <li><a href="#home" class="nav-item-link" data-page="home" onclick="navigateTo('home'); closeMobileMenu();"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#about" class="nav-item-link" data-page="about" onclick="navigateTo('about'); closeMobileMenu();"><i class="fas fa-landmark"></i> Background & Leadership</a></li>
+      <li><a href="#branches" class="nav-item-link" data-page="branches" onclick="navigateTo('branches'); closeMobileMenu();"><i class="fas fa-map-marked-alt"></i> Branch Directory</a></li>
+      <li><a href="#grievance" class="nav-item-link" data-page="grievance" onclick="navigateTo('grievance'); closeMobileMenu();"><i class="fas fa-balance-scale"></i> Report Workplace Dispute</a></li>
+      <li><a href="#resources" class="nav-item-link" data-page="resources" onclick="navigateTo('resources'); closeMobileMenu();"><i class="fas fa-file-pdf"></i> Resource Downloads</a></li>
+      <li><a href="#perks" class="nav-item-link" data-page="perks" onclick="navigateTo('perks'); closeMobileMenu();"><i class="fas fa-hand-holding-usd"></i> Welfare & SACCO Perks</a></li>
+      <li><a href="#events" class="nav-item-link" data-page="events" onclick="navigateTo('events'); closeMobileMenu();"><i class="fas fa-calendar-alt"></i> Upcoming Events</a></li>
+      <li><a href="#calculator" class="nav-item-link" data-page="calculator" onclick="navigateTo('calculator'); closeMobileMenu();"><i class="fas fa-calculator"></i> Dues Calculator</a></li>
+      <li><a href="#join" class="nav-item-link" data-page="join" onclick="navigateTo('join'); closeMobileMenu();"><i class="fas fa-user-plus"></i> Digital ID Card</a></li>
+      <li><a href="#news" class="nav-item-link" data-page="news" onclick="navigateTo('news'); closeMobileMenu();"><i class="fas fa-newspaper"></i> News & Victories</a></li>
+      <li><a href="#gallery" class="nav-item-link" data-page="gallery" onclick="navigateTo('gallery'); closeMobileMenu();"><i class="fas fa-images"></i> Media Gallery</a></li>
+      <li><a href="#faq" class="nav-item-link" data-page="faq" onclick="navigateTo('faq'); closeMobileMenu();"><i class="fas fa-question-circle"></i> FAQ & Help</a></li>
+    </ul>
+  </div>
+
+  <!-- PARTNERS & AFFILIATES INFINITE MARQUEE -->
+  <div class="marquee-container">
+    <div class="marquee-track">
+      <span class="partner-item"><i class="fas fa-handshake"></i> COFTU (Central Organisation of Free Trade Unions)</span>
+      <span class="partner-item"><i class="fas fa-globe-africa"></i> ILO (International Labour Organization)</span>
+      <span class="partner-item"><i class="fas fa-building"></i> MAAIF (Ministry of Agriculture, Animal Industry & Fisheries)</span>
+      <span class="partner-item"><i class="fas fa-landmark"></i> MGLSD (Ministry of Gender, Labour & Social Development)</span>
+      <span class="partner-item"><i class="fas fa-shield-alt"></i> PSI (Public Services International)</span>
+      <span class="partner-item"><i class="fas fa-seedling"></i> IUF (International Union of Food & Farm Workers)</span>
+      <span class="partner-item"><i class="fas fa-university"></i> UISTAACT (France Agricultural Federation)</span>
+      <span class="partner-item"><i class="fas fa-piggy-bank"></i> NSSF Uganda</span>
+      
+      <!-- Duplicate set for seamless loop -->
+      <span class="partner-item"><i class="fas fa-handshake"></i> COFTU (Central Organisation of Free Trade Unions)</span>
+      <span class="partner-item"><i class="fas fa-globe-africa"></i> ILO (International Labour Organization)</span>
+      <span class="partner-item"><i class="fas fa-building"></i> MAAIF (Ministry of Agriculture, Animal Industry & Fisheries)</span>
+      <span class="partner-item"><i class="fas fa-landmark"></i> MGLSD (Ministry of Gender, Labour & Social Development)</span>
+      <span class="partner-item"><i class="fas fa-shield-alt"></i> PSI (Public Services International)</span>
+      <span class="partner-item"><i class="fas fa-seedling"></i> IUF (International Union of Food & Farm Workers)</span>
+      <span class="partner-item"><i class="fas fa-university"></i> UISTAACT (France Agricultural Federation)</span>
+      <span class="partner-item"><i class="fas fa-piggy-bank"></i> NSSF Uganda</span>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="container" style="flex: 1;">
+
+    <!-- ==========================================================================
+         PAGE 1: HOME PAGE
+         ========================================================================== -->
+    <section id="page-home" class="page-section active">
+      
+      <!-- INTERACTIVE HERO SLIDER (4 SLIDES) -->
+      <div class="hero-slider-container" id="heroSliderContainer">
+        <!-- Arrow Navigation Buttons -->
+        <button class="slider-arrow-btn slider-prev-btn" onclick="changeHeroSlide(-1)" aria-label="Previous Slide">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider-arrow-btn slider-next-btn" onclick="changeHeroSlide(1)" aria-label="Next Slide">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Slide Indicators Dots Bar -->
+        <div class="slider-dots-bar">
+          <div class="slider-dot active" onclick="goToHeroSlide(0)"></div>
+          <div class="slider-dot" onclick="goToHeroSlide(1)"></div>
+          <div class="slider-dot" onclick="goToHeroSlide(2)"></div>
+          <div class="slider-dot" onclick="goToHeroSlide(3)"></div>
+        </div>
+
+        <!-- SLIDE 1: General Union Overview -->
+        <div class="hero-slide active" style="background: linear-gradient(135deg, rgba(9,35,23,0.92) 0%, rgba(18,64,43,0.85) 100%), url('images/ufabwu_hero_bg.jpg') center/cover no-repeat;">
+          <div class="hero-grid">
+            <div>
+              <div class="pill-badge" style="margin-bottom:1.25rem;">
+                <i class="fas fa-shield-alt"></i> Official Labour Union No. 38 (LUN 38)
+              </div>
+              <h1 class="hero-title" id="homeHeroTitle">
+                Organizing & Defending <br>
+                <span class="highlight">Uganda’s Agro Workers</span>
+              </h1>
+              <p class="hero-subtitle" id="homeHeroSub">
+                We empower agricultural workers across plantations, private farms, processing enterprises, and public service through collective bargaining, legal advocacy, and sustainable skills.
+              </p>
+              <div class="hero-actions">
+                <a href="#join" class="btn btn-primary" onclick="navigateTo('join')">
+                  <i class="fas fa-user-plus"></i> Join UFABWU Today
+                </a>
+                <a href="#grievance" class="btn btn-outline" style="color:#FFF; border-color:rgba(255,255,255,0.3);" onclick="navigateTo('grievance')">
+                  <i class="fas fa-exclamation-triangle"></i> Report Workplace Dispute
+                </a>
+                <a href="#calculator" class="btn btn-outline" style="color:var(--accent-gold); border-color:var(--accent-gold);" onclick="navigateTo('calculator')">
+                  <i class="fas fa-calculator"></i> Calculate Benefits
+                </a>
+              </div>
+            </div>
+            <div>
+              <!-- Live Animated Counter Box -->
+              <div class="hero-stats-card">
+                <div class="stat-box">
+                  <div class="stat-number" data-count="50">0</div>
+                  <div class="stat-label">Active Branches</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-number" data-count="10000">0</div>
+                  <div class="stat-label">Members Represented</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-number" data-count="5">0</div>
+                  <div class="stat-label">National Regions</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-number" data-count="2006">0</div>
+                  <div class="stat-label">Year Established</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: Collective Bargaining & Wage Victories -->
+        <div class="hero-slide" style="background: linear-gradient(135deg, rgba(9,35,23,0.94) 0%, rgba(16,185,129,0.85) 100%), url('images/cba_signing.jpg') center/cover no-repeat;">
+          <div class="hero-grid">
+            <div>
+              <div class="pill-badge" style="margin-bottom:1.25rem; background:rgba(16,185,129,0.2); border-color:#10B981; color:#10B981;">
+                <i class="fas fa-handshake"></i> Collective Bargaining Victory
+              </div>
+              <h1 class="hero-title">
+                Securing Fair Wages & <br>
+                <span class="highlight">Safer Workplaces</span>
+              </h1>
+              <p class="hero-subtitle">
+                UFABWU successfully negotiated a 14% wage increase and mandatory occupational health safety gear for thousands of tea, sugar, and agro-processing workers across Uganda.
+              </p>
+              <div class="hero-actions">
+                <a href="#resources" class="btn btn-primary" onclick="navigateTo('resources')">
+                  <i class="fas fa-file-pdf"></i> Download Model CBA Template
+                </a>
+                <a href="#calculator" class="btn btn-outline" style="color:#FFF; border-color:rgba(255,255,255,0.4);" onclick="navigateTo('calculator')">
+                  <i class="fas fa-calculator"></i> Calculate Dues & Benefits
+                </a>
+              </div>
+            </div>
+            <div>
+              <div class="glass-card" style="padding: 2.2rem; text-align: center; background: rgba(9,35,23,0.85);">
+                <i class="fas fa-award" style="font-size: 3.5rem; color: var(--accent-gold); margin-bottom: 1rem;"></i>
+                <h3>100% Legally Binding Agreements</h3>
+                <p style="color: rgba(255,255,255,0.85); margin-top: 0.5rem; font-size: 0.95rem;">
+                  Protecting workers against sudden pay cuts, illegal overtime defaults, and hazardous pesticide exposure.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: Free Legal Defense & Grievances -->
+        <div class="hero-slide" style="background: linear-gradient(135deg, rgba(9,35,23,0.94) 0%, rgba(216,170,53,0.88) 100%), url('images/field_delegates.jpg') center/cover no-repeat;">
+          <div class="hero-grid">
+            <div>
+              <div class="pill-badge" style="margin-bottom:1.25rem;">
+                <i class="fas fa-gavel"></i> Free Legal Representation
+              </div>
+              <h1 class="hero-title">
+                Standing Up For <br>
+                <span class="highlight">Unfairly Treated Workers</span>
+              </h1>
+              <p class="hero-subtitle">
+                Faced wrongful dismissal or workplace injury? UFABWU legal advocates provide 100% free legal aid in the Industrial Court to restore worker dignity and compensation.
+              </p>
+              <div class="hero-actions">
+                <a href="#grievance" class="btn btn-primary" onclick="navigateTo('grievance')">
+                  <i class="fas fa-balance-scale"></i> Submit Confidential Grievance
+                </a>
+                <a href="#about" class="btn btn-outline" style="color:#FFF; border-color:rgba(255,255,255,0.4);" onclick="navigateTo('about')">
+                  <i class="fas fa-landmark"></i> View Legal Foundation
+                </a>
+              </div>
+            </div>
+            <div>
+              <div class="glass-card" style="padding: 2.2rem; text-align: center; background: rgba(9,35,23,0.85);">
+                <i class="fas fa-balance-scale-right" style="font-size: 3.5rem; color: var(--accent-gold); margin-bottom: 1rem;"></i>
+                <h3>Industrial Dispute Defense</h3>
+                <p style="color: rgba(255,255,255,0.85); margin-top: 0.5rem; font-size: 0.95rem;">
+                  Over 45 workers reinstated with full backpay in recent Industrial Court rulings nationwide.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 4: Digital ID Card & SACCO Perks -->
+        <div class="hero-slide" style="background: linear-gradient(135deg, rgba(9,35,23,0.94) 0%, rgba(18,64,43,0.92) 100%), url('images/nelson_wafana.jpg') center/cover no-repeat;">
+          <div class="hero-grid">
+            <div>
+              <div class="pill-badge" style="margin-bottom:1.25rem;">
+                <i class="fas fa-id-card"></i> Member Perks & Welfare
+              </div>
+              <h1 class="hero-title">
+                Digital Membership & <br>
+                <span class="highlight">SACCO Welfare Credit</span>
+              </h1>
+              <p class="hero-subtitle">
+                Instantly generate your official UFABWU digital member ID card and access low-interest credit, education bursaries, and group medical cover.
+              </p>
+              <div class="hero-actions">
+                <a href="#join" class="btn btn-primary" onclick="navigateTo('join')">
+                  <i class="fas fa-user-plus"></i> Generate Digital ID Card
+                </a>
+                <a href="#perks" class="btn btn-outline" style="color:#FFF; border-color:rgba(255,255,255,0.4);" onclick="navigateTo('perks')">
+                  <i class="fas fa-hand-holding-usd"></i> Explore SACCO Perks
+                </a>
+              </div>
+            </div>
+            <div>
+              <div class="glass-card" style="padding: 2.2rem; text-align: center; background: rgba(9,35,23,0.85);">
+                <i class="fas fa-id-badge" style="font-size: 3.5rem; color: var(--accent-gold); margin-bottom: 1rem;"></i>
+                <h3>Instant Digital ID Card</h3>
+                <p style="color: rgba(255,255,255,0.85); margin-top: 0.5rem; font-size: 0.95rem;">
+                  Verifiable digital credentials for farm and processing workers across 50+ enterprise branches.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Key Pillars -->
+      <div class="features-grid">
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap"><i class="fas fa-gavel"></i></div>
+          <h3 class="feature-title">Collective Bargaining</h3>
+          <p class="feature-text">Securing binding agreements for fair wages, safe workplace conditions, health protection, and reasonable working hours.</p>
+        </div>
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap"><i class="fas fa-balance-scale"></i></div>
+          <h3 class="feature-title">Legal Representation</h3>
+          <p class="feature-text">Dedicated legal aid for workers faced with wrongful termination, industrial injury disputes, or unfair treatment.</p>
+        </div>
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
+          <h3 class="feature-title">Capacity Building</h3>
+          <p class="feature-text">Educating members and shop stewards on labor rights, occupational safety, and leadership development.</p>
+        </div>
+      </div>
+
+      <!-- MEMBER TESTIMONIALS / STORIES SECTION -->
+      <div style="margin-top: 4rem;">
+        <div class="section-header">
+          <span class="section-subtitle">Real Member Impact</span>
+          <h2 class="section-title">Voices of Agro Workers Across Uganda</h2>
+          <p class="section-desc">Hear how UFABWU collective bargaining, legal defense, and SACCO welfare transform working lives daily.</p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Testimonial 1 -->
+          <div class="glass-card feature-card" style="position: relative;">
+            <i class="fas fa-quote-right" style="position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.2rem; color: var(--accent-gold); opacity: 0.25;"></i>
+            <div style="display: flex; gap: 4px; color: var(--accent-gold); margin-bottom: 0.8rem;">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p style="font-style: italic; color: var(--text-secondary); font-size: 0.96rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              "UFABWU helped our branch negotiate a 14% wage increase, proper protective equipment for sprayers, and paid maternity leave allowances for female workers."
+            </p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <img src="images/member_story_sarah.jpg" alt="Nalubega Sarah" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2.5px solid var(--accent-gold); box-shadow: 0 4px 12px rgba(216,170,53,0.3);">
+              <div>
+                <strong style="color: var(--text-primary); display: block; font-size: 0.98rem;">Nalubega Sarah</strong>
+                <span style="font-size: 0.82rem; color: var(--accent-gold);">Tea Estate Steward · Mukono Branch</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="glass-card feature-card" style="position: relative;">
+            <i class="fas fa-quote-right" style="position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.2rem; color: var(--accent-gold); opacity: 0.25;"></i>
+            <div style="display: flex; gap: 4px; color: var(--accent-gold); margin-bottom: 0.8rem;">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p style="font-style: italic; color: var(--text-secondary); font-size: 0.96rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              "When I was wrongfully dismissed after a workplace injury, UFABWU legal advocates represented me in the Industrial Court at no cost and won backpay and full job reinstatement."
+            </p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <img src="images/member_story_david.jpg" alt="Okello David" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2.5px solid var(--accent-gold); box-shadow: 0 4px 12px rgba(216,170,53,0.3);">
+              <div>
+                <strong style="color: var(--text-primary); display: block; font-size: 0.98rem;">Okello David</strong>
+                <span style="font-size: 0.82rem; color: var(--accent-gold);">Agro-Processor · Jinja Enterprise</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="glass-card feature-card" style="position: relative;">
+            <i class="fas fa-quote-right" style="position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.2rem; color: var(--accent-gold); opacity: 0.25;"></i>
+            <div style="display: flex; gap: 4px; color: var(--accent-gold); margin-bottom: 0.8rem;">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p style="font-style: italic; color: var(--text-secondary); font-size: 0.96rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              "Accessing the UFABWU SACCO education bursary allowed me to pay secondary school fees for my two children without taking high-interest loans."
+            </p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <img src="images/member_story_joseph.jpg" alt="Turyatemba Joseph" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2.5px solid var(--accent-gold); box-shadow: 0 4px 12px rgba(216,170,53,0.3);">
+              <div>
+                <strong style="color: var(--text-primary); display: block; font-size: 0.98rem;">Turyatemba Joseph</strong>
+                <span style="font-size: 0.82rem; color: var(--accent-gold);">Livestock Farm Lead · Mbarara Branch</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIDEO GALLERY / YOUTUBE EMBED SECTION -->
+      <div style="margin-top: 4rem;">
+        <div class="section-header">
+          <span class="section-subtitle">Video Archive</span>
+          <h2 class="section-title">UFABWU Field Documentaries & Media</h2>
+          <p class="section-desc">Watch video highlights of CBA negotiation signings, national delegates rallies, and shop steward capacity workshops.</p>
+        </div>
+
+        <div class="video-grid">
+          <!-- Video 1 -->
+          <div class="video-card" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/7pSaxyqunLU', 'UFABWU Quinquennial National Delegates Conference Highlights')">
+            <div class="video-thumb-wrap">
+              <img src="images/ufabwu_hero_bg.jpg" alt="Delegates Conference Video">
+              <div class="play-btn-overlay">
+                <div class="play-icon-circle"><i class="fas fa-play"></i></div>
+              </div>
+              <span class="video-duration-badge">04:15</span>
+            </div>
+            <div style="padding: 1.2rem;">
+              <span class="pill-badge" style="margin-bottom: 0.4rem; font-size: 0.75rem;">National Convention</span>
+              <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-top: 4px;">National Delegates Conference Highlights</h4>
+              <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 4px;"><i class="fas fa-eye"></i> 1,420 views · Kampala Secretariat</p>
+            </div>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="video-card" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/5q4YZaC5scg', 'Historic Collective Bargaining Agreement Signing Ceremony')">
+            <div class="video-thumb-wrap">
+              <img src="images/cba_signing.jpg" alt="CBA Signing Video">
+              <div class="play-btn-overlay">
+                <div class="play-icon-circle"><i class="fas fa-play"></i></div>
+              </div>
+              <span class="video-duration-badge">03:30</span>
+            </div>
+            <div style="padding: 1.2rem;">
+              <span class="pill-badge" style="margin-bottom: 0.4rem; font-size: 0.75rem;">CBA Signing</span>
+              <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-top: 4px;">CBA Agreement Signing Ceremony</h4>
+              <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 4px;"><i class="fas fa-eye"></i> 2,180 views · Jinja Plantations</p>
+            </div>
+          </div>
+
+          <!-- Video 3 -->
+          <div class="video-card" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/gO7XEs8evF4', 'Shop Stewards Occupational Safety & Health (OSH) Training')">
+            <div class="video-thumb-wrap">
+              <img src="images/field_delegates.jpg" alt="OSH Safety Training Video">
+              <div class="play-btn-overlay">
+                <div class="play-icon-circle"><i class="fas fa-play"></i></div>
+              </div>
+              <span class="video-duration-badge">05:10</span>
+            </div>
+            <div style="padding: 1.2rem;">
+              <span class="pill-badge" style="margin-bottom: 0.4rem; font-size: 0.75rem;">Capacity Building</span>
+              <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-top: 4px;">Shop Stewards Workplace Safety Workshop</h4>
+              <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 4px;"><i class="fas fa-eye"></i> 980 views · Gulu Regional Hub</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVE SOCIAL MEDIA FEED SECTION -->
+      <div style="margin-top: 4rem;">
+        <div class="section-header">
+          <span class="section-subtitle">Live Updates</span>
+          <h2 class="section-title">UFABWU Social Media & News Feed</h2>
+          <p class="section-desc">Follow real-time announcements, policy debates, and field updates directly from our social channels.</p>
+        </div>
+
+        <div class="social-feed-grid">
+          <!-- X / Twitter Card -->
+          <div class="glass-card social-card">
+            <div>
+              <div class="social-header">
+                <div class="social-icon-box twitter"><i class="fab fa-x-twitter"></i></div>
+                <div>
+                  <strong style="color: var(--text-primary); font-size: 0.98rem; display: block;">UFABWU Uganda</strong>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">@UFABWU_Official · 2h ago</span>
+                </div>
+              </div>
+              <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5;">
+                General Secretary Nelson Wafana led delegations to MAAIF today to advocate for standardized pesticide protective gear across commercial estates. #DecentWork #UgandaLabour
+              </p>
+            </div>
+            <div style="margin-top: 1.2rem; padding-top: 0.8rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted);">
+              <span><i class="fas fa-heart" style="color:#EF4444; margin-right:4px;"></i> 148 Likes</span>
+              <span><i class="fas fa-retweet" style="color:#1DA1F2; margin-right:4px;"></i> 42 Retweets</span>
+              <a href="https://twitter.com" target="_blank" rel="noopener" style="color: var(--accent-gold); font-weight: bold;">View Post <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+
+          <!-- Facebook Card -->
+          <div class="glass-card social-card">
+            <div>
+              <div class="social-header">
+                <div class="social-icon-box facebook"><i class="fab fa-facebook-f"></i></div>
+                <div>
+                  <strong style="color: var(--text-primary); font-size: 0.98rem; display: block;">Uganda Agro Workers Union</strong>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">Facebook Official · 5h ago</span>
+                </div>
+              </div>
+              <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5;">
+                Congratulations to our Jinja Branch shop stewards for completing the 3-day Labour Law & CBA Negotiation workshop! Empowered workers build strong communities. 🌾👏
+              </p>
+            </div>
+            <div style="margin-top: 1.2rem; padding-top: 0.8rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted);">
+              <span><i class="fas fa-thumbs-up" style="color:#1877F2; margin-right:4px;"></i> 284 Likes</span>
+              <span><i class="fas fa-comment" style="margin-right:4px;"></i> 56 Comments</span>
+              <a href="https://facebook.com" target="_blank" rel="noopener" style="color: var(--accent-gold); font-weight: bold;">View Post <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+
+          <!-- LinkedIn Card -->
+          <div class="glass-card social-card">
+            <div>
+              <div class="social-header">
+                <div class="social-icon-box linkedin"><i class="fab fa-linkedin-in"></i></div>
+                <div>
+                  <strong style="color: var(--text-primary); font-size: 0.98rem; display: block;">UFABWU Labour Union</strong>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">LinkedIn Network · 1d ago</span>
+                </div>
+              </div>
+              <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5;">
+                UFABWU partners with ILO & COFTU to advance occupational health standards and social protection for 10,000+ agricultural workers in Uganda.
+              </p>
+            </div>
+            <div style="margin-top: 1.2rem; padding-top: 0.8rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted);">
+              <span><i class="fas fa-thumbs-up" style="color:#0A66C2; margin-right:4px;"></i> 195 Likes</span>
+              <span><i class="fas fa-share" style="margin-right:4px;"></i> 34 Shares</span>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" style="color: var(--accent-gold); font-weight: bold;">View Post <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE MAP & REGIONAL BRANCH HUB -->
+      <div style="margin-top: 4rem;">
+        <div class="section-header">
+          <span class="section-subtitle">National Footprint</span>
+          <h2 class="section-title">Interactive Regional Branch Map</h2>
+          <p class="section-desc">Click any regional pin or branch card to view headquarters location, contact details, and branch stewards.</p>
+        </div>
+
+        <div class="glass-card map-container-box">
+          <!-- Vector Map Container -->
+          <div class="map-vector-graphic" id="mapGraphicContainer">
+            <!-- Ambient Grid overlay -->
+            <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(216,170,53,0.15) 1px, transparent 0); background-size: 24px 24px;"></div>
+
+            <!-- Branch Map Pins -->
+            <div class="map-pin active" id="pinKampala" style="top: 55%; left: 52%;" onclick="selectMapBranch(1)">
+              <div class="map-pin-icon"><i class="fas fa-star"></i></div>
+              <span class="map-pin-label">Kampala HQ</span>
+            </div>
+
+            <div class="map-pin" id="pinJinja" style="top: 52%; left: 62%;" onclick="selectMapBranch(2)">
+              <div class="map-pin-icon"><i class="fas fa-building"></i></div>
+              <span class="map-pin-label">Jinja Branch</span>
+            </div>
+
+            <div class="map-pin" id="pinMukono" style="top: 50%; left: 55%;" onclick="selectMapBranch(3)">
+              <div class="map-pin-icon"><i class="fas fa-leaf"></i></div>
+              <span class="map-pin-label">Mukono Branch</span>
+            </div>
+
+            <div class="map-pin" id="pinMbarara" style="top: 70%; left: 35%;" onclick="selectMapBranch(4)">
+              <div class="map-pin-icon"><i class="fas fa-cow"></i></div>
+              <span class="map-pin-label">Mbarara Branch</span>
+            </div>
+
+            <div class="map-pin" id="pinGulu" style="top: 25%; left: 48%;" onclick="selectMapBranch(5)">
+              <div class="map-pin-icon"><i class="fas fa-seedling"></i></div>
+              <span class="map-pin-label">Gulu Branch</span>
+            </div>
+
+            <div class="map-pin" id="pinArua" style="top: 20%; left: 25%;" onclick="selectMapBranch(6)">
+              <div class="map-pin-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <span class="map-pin-label">Arua Branch</span>
+            </div>
+          </div>
+
+          <!-- Selected Branch Info Panel -->
+          <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="pill-badge" style="margin-bottom: 0.8rem;" id="mapBranchRegionBadge">Central Region HQ</span>
+              <h3 style="font-size: 1.5rem; color: var(--text-primary);" id="mapBranchTitle">Kampala Central Secretariat</h3>
+              <p style="color: var(--text-secondary); font-size: 0.92rem; margin-top: 0.5rem;" id="mapBranchSector">Public Service & MAAIF Agency Coordination</p>
+
+              <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.9rem;">
+                <div><i class="fas fa-map-marker-alt" style="color: var(--accent-gold); margin-right: 8px;"></i> <span id="mapBranchAddress">Komamboga, Gayaza Road, Kampala</span></div>
+                <div><i class="fas fa-user-tie" style="color: var(--accent-gold); margin-right: 8px;"></i> Steward: <strong id="mapBranchLeader">Nelson Wafana Makwasi</strong></div>
+                <div><i class="fas fa-phone" style="color: var(--accent-gold); margin-right: 8px;"></i> Hotline: <span id="mapBranchPhone">+256 772 518902</span></div>
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+              <button class="btn btn-primary" style="width: 100%;" id="mapBranchCallBtn" onclick="copyText('+256772518902')">
+                <i class="fas fa-phone-alt"></i> Contact Branch Steward
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Grid -->
+      <div style="margin-top: 3.5rem;" class="glass-card">
+        <div style="padding: 2.5rem; display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-between;">
+          <div>
+            <h2>Ready to Protect Your Rights as a Worker?</h2>
+            <p style="color: var(--text-secondary); margin-top: 0.4rem;">Join thousands of agricultural workers across Uganda in building a unified, protected future.</p>
+          </div>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="#join" class="btn btn-primary" onclick="navigateTo('join')">Generate Digital Member ID Card</a>
+            <a href="#calculator" class="btn btn-secondary" onclick="navigateTo('calculator')">Calculate Dues & Benefits</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEWSLETTER SIGNUP SECTION -->
+      <div style="margin-top: 4rem;">
+        <div class="newsletter-box">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;">
+            <div>
+              <span class="pill-badge" style="background: rgba(216,170,53,0.2); color: var(--accent-gold); border-color: var(--accent-gold); margin-bottom: 1rem;">
+                <i class="fas fa-paper-plane"></i> Monthly Bulletin
+              </span>
+              <h2 style="font-size: 2.2rem; color: #FFFFFF; line-height: 1.25; margin-bottom: 0.8rem;">
+                Subscribe to UFABWU Labor Rights Dispatch
+              </h2>
+              <p style="color: rgba(255,255,255,0.85); font-size: 1rem; line-height: 1.6;">
+                Get monthly summaries of CBA agreements, Industrial Court decisions, SACCO bursary deadlines, and upcoming rally dates delivered directly to your inbox or WhatsApp.
+              </p>
+            </div>
+            <div>
+              <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+                <input type="email" id="nlEmail" class="form-control" placeholder="Enter your email address" required style="background: rgba(255,255,255,0.95); color: #092317;">
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                  <select id="nlSector" class="form-control" style="background: rgba(255,255,255,0.95); color: #092317;">
+                    <option value="All Sectors">All Sectors</option>
+                    <option value="Tea & Sugar Plantation">Tea & Sugar Plantation</option>
+                    <option value="Agro-Processing">Agro-Processing</option>
+                    <option value="Public Service MAAIF">Public Service MAAIF</option>
+                  </select>
+                  <button type="submit" class="btn btn-primary" style="height: 100%;">
+                    <i class="fas fa-check-circle"></i> Subscribe Free
+                  </button>
+                </div>
+
+                <div style="font-size: 0.78rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 6px;">
+                  <i class="fas fa-shield-alt" style="color: var(--accent-gold);"></i> Zero Spam guarantee. Unsubscribe at any time with one click.
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 4rem;">
+        <div class="section-header">
+          <span class="section-subtitle">Get In Touch</span>
+          <h2 class="section-title">Contact UFABWU Secretariat</h2>
+          <p class="section-desc">Have questions about union membership, workplace representation, or official partnerships? Reach out directly to our team.</p>
+        </div>
+
+        <div class="glass-card" style="padding: 2.8rem; margin-top: 2rem;">
+          <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start;">
+            
+            <!-- Contact Details & Info Cards -->
+            <div style="display: flex; flex-direction: column; gap: 1.8rem;">
+              <div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.6rem; color: var(--text-primary);">
+                  <i class="fas fa-building" style="color: var(--accent-gold); margin-right: 8px;"></i> National Head Office
+                </h3>
+                <p style="color: var(--text-secondary); line-height: 1.6;">
+                  Visit or contact our National Secretariat for official inquiries, legal support, and member welfare services.
+                </p>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                <div style="display: flex; align-items: flex-start; gap: 14px; padding: 1rem; background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                  <div class="feature-icon-wrap" style="width: 44px; height: 44px; font-size: 1.2rem; margin-bottom: 0; flex-shrink: 0;">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <div>
+                    <strong style="color: var(--text-primary); display: block; margin-bottom: 2px;">Headquarters Location</strong>
+                    <span style="font-size: 0.9rem; color: var(--text-secondary);">Komamboga, Gayaza Road, Kampala, Uganda</span>
+                    <span style="font-size: 0.85rem; color: var(--accent-gold); display: block; margin-top: 2px;">P.O. Box 34214, Kampala</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: flex-start; gap: 14px; padding: 1rem; background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                  <div class="feature-icon-wrap" style="width: 44px; height: 44px; font-size: 1.2rem; margin-bottom: 0; flex-shrink: 0;">
+                    <i class="fas fa-phone-alt"></i>
+                  </div>
+                  <div>
+                    <strong style="color: var(--text-primary); display: block; margin-bottom: 2px;">Hotline & General Secretariat</strong>
+                    <span style="font-size: 0.9rem; color: var(--text-secondary);">+256 772 518902 / +256 772 572693</span>
+                    <button class="btn btn-outline" style="margin-top: 6px; padding: 0.3rem 0.8rem; font-size: 0.78rem;" onclick="copyText('+256772518902')">
+                      <i class="fas fa-copy"></i> Copy Hotline
+                    </button>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: flex-start; gap: 14px; padding: 1rem; background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                  <div class="feature-icon-wrap" style="width: 44px; height: 44px; font-size: 1.2rem; margin-bottom: 0; flex-shrink: 0;">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <div>
+                    <strong style="color: var(--text-primary); display: block; margin-bottom: 2px;">Official Email & Inquiries</strong>
+                    <span style="font-size: 0.9rem; color: var(--text-secondary);">info@ufabwu.org / secretariat@ufabwu.org</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: flex-start; gap: 14px; padding: 1rem; background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                  <div class="feature-icon-wrap" style="width: 44px; height: 44px; font-size: 1.2rem; margin-bottom: 0; flex-shrink: 0;">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <div>
+                    <strong style="color: var(--text-primary); display: block; margin-bottom: 2px;">Working Hours</strong>
+                    <span style="font-size: 0.9rem; color: var(--text-secondary);">Mon - Fri: 8:00 AM – 5:00 PM (24/7 Member Helpline)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Message Form -->
+            <div style="background: var(--bg-surface); border-radius: var(--radius-md); padding: 2.2rem; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+              <h3 style="font-size: 1.4rem; margin-bottom: 1.2rem; color: var(--text-primary); display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-paper-plane" style="color: var(--accent-gold);"></i> Send Us a Message
+              </h3>
+              
+              <form id="homeContactForm" onsubmit="handleContactSubmit(event)">
+                <div class="form-group">
+                  <label for="cName"><i class="fas fa-user"></i> Full Name *</label>
+                  <input type="text" id="cName" class="form-control" placeholder="Enter your full name" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                  <div class="form-group">
+                    <label for="cPhone"><i class="fas fa-phone"></i> Phone / WhatsApp *</label>
+                    <input type="tel" id="cPhone" class="form-control" placeholder="+256 700 000000" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="cEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="cEmail" class="form-control" placeholder="name@example.com">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="cSubject"><i class="fas fa-tag"></i> Inquiry Subject *</label>
+                  <select id="cSubject" class="form-control" required>
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Membership & ID Card">Membership & ID Card Assistance</option>
+                    <option value="Legal & Grievance Assistance">Legal & Grievance Support</option>
+                    <option value="Branch & Steward Inquiries">Branch & Steward Inquiries</option>
+                    <option value="Media & Strategic Partnerships">Media & Strategic Partnerships</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="cMessage"><i class="fas fa-comment-alt"></i> Your Message *</label>
+                  <textarea id="cMessage" class="form-control" rows="4" placeholder="How can the UFABWU secretariat support you today?" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1rem; padding: 0.85rem;">
+                  <i class="fas fa-paper-plane"></i> Send Direct Message
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 2: ABOUT & HISTORICAL BACKGROUND
+         ========================================================================== -->
+    <section id="page-about" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">Who We Are</span>
+        <h2 class="section-title">Background & Governance of UFABWU</h2>
+        <p class="section-desc">Registered Labour Union No. 38 (LUN 38) under the provisions of the Labour Unions Act No. 7 of 2006.</p>
+      </div>
+
+      <!-- Historical Background Narrative Card -->
+      <div class="glass-card" style="padding: 2.8rem; margin-bottom: 3rem;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem;">
+          <div class="logo-icon-wrap" style="width: 48px; height: 48px;"><i class="fas fa-history"></i></div>
+          <div>
+            <h3 style="font-size: 1.6rem; color: var(--text-primary);">Union Background & Foundation Narrative</h3>
+            <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: bold;">LUN 38 · Registered 29th December 2006</span>
+          </div>
+        </div>
+
+        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+          The <strong>Uganda Farm and Agro-Based Workers’ Union (UFABWU)</strong> was officially established and registered on <strong>29th December 2006</strong> as <strong>Labour Union No. 38 (LUN 38)</strong> under the provisions of the Labour Unions Act No. 7 of 2006 and the Constitution of the Republic of Uganda (Articles 29 and 40(3)).
+        </p>
+
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+          UFABWU was founded to address historical vulnerabilities, low wages, lack of formal representation, and unsafe working conditions faced by agricultural workers across Uganda. The union acts as a recognized legal umbrella body uniting workers across both the <strong>Public Sector</strong> (Ministry of Agriculture, Animal Industry & Fisheries - MAAIF and its specialized agencies) and the <strong>Private Sector</strong> (tea, sugar, coffee plantations, livestock, poultry, aquaculture, and agro-processing factories).
+        </p>
+
+        <!-- Historical Milestones Timeline -->
+        <h4 style="font-size: 1.3rem; margin: 2rem 0 1rem 0; color: var(--text-primary);"><i class="fas fa-flag-checkered" style="color: var(--accent-gold);"></i> Key Historical Milestones</h4>
+
+        <div class="timeline-container">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2006</div>
+            <strong style="color: var(--text-primary);">Official Union Registration (LUN 38)</strong>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Registered on December 29, 2006 under the Labour Unions Act No. 7 of 2006 as a national labour union representing all agricultural workers in Uganda.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2008</div>
+            <strong style="color: var(--text-primary);">First Major Recognition Agreements</strong>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Signed historic Recognition Agreements with leading commercial sugar and tea estates, establishing mandatory shop steward committees.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2012</div>
+            <strong style="color: var(--text-primary);">National & Global Affiliations</strong>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Affiliated with COFTU (Central Organisation of Free Trade Unions) and global federations: PSI, ILO, IUF, and UISTAACT (France).</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2017</div>
+            <strong style="color: var(--text-primary);">Expansion to 50+ Branches & 5 Regions</strong>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Established 5 Regional Executive Councils (Central, Eastern, Northern, Western, West Nile) serving over 50 enterprise branch committees.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2026</div>
+            <strong style="color: var(--text-primary);">Digital Transformation & Enterprise Growth</strong>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Empowering over 10,000 active agricultural members with digital member ID badges, confidential dispute intake, and collective bargaining coverage.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vision & Mission -->
+      <div class="features-grid" style="margin-bottom: 3rem;">
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap"><i class="fas fa-eye"></i></div>
+          <h3 class="feature-title">Our Vision</h3>
+          <p class="feature-text">A just, safe, and prosperous working environment leading to increased agricultural productivity and dignified livelihoods for all farm workers.</p>
+        </div>
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap"><i class="fas fa-bullhorn"></i></div>
+          <h3 class="feature-title">Our Mission</h3>
+          <p class="feature-text">Provision of a recognized, legal, and united forum for negotiations, representation, and voicing of workers' rights across public and private agricultural sectors.</p>
+        </div>
+      </div>
+
+      <!-- Leadership & Contacts -->
+      <div class="glass-card" style="padding: 2.5rem; margin-bottom: 3rem;">
+        <h3 style="font-size: 1.6rem; margin-bottom: 1.5rem;"><i class="fas fa-address-book" style="color: var(--accent-gold);"></i> National Secretariat & Leadership</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+          <div style="padding: 1.2rem; background: var(--bg-surface); border-radius: var(--radius-md); border: 1.5px solid var(--border-subtle); text-align: center;">
+            <img src="images/nelson_wafana.jpg" alt="Nelson Wafana" style="width:90px; height:90px; border-radius:50%; object-fit:cover; margin-bottom:0.8rem; border:2px solid var(--accent-gold);">
+            <h4>Nelson Wafana Makwasi</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">General Secretary</p>
+            <p style="margin-top: 0.8rem;"><i class="fas fa-phone"></i> +256 772 518902 / +256 702 023434</p>
+            <button class="btn btn-outline" style="margin-top: 0.8rem; padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="copyText('+256772518902')">
+              <i class="fas fa-copy"></i> Copy Phone Number
+            </button>
+          </div>
+          <div style="padding: 1.2rem; background: var(--bg-surface); border-radius: var(--radius-md); border: 1.5px solid var(--border-subtle); text-align: center;">
+            <img src="images/national_chairperson.jpg" alt="National Chairperson" style="width:90px; height:90px; border-radius:50%; object-fit:cover; margin-bottom:0.8rem; border:2px solid var(--accent-gold);">
+            <h4>Office of the National Chairperson</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">National Executive Council</p>
+            <p style="margin-top: 0.8rem;"><i class="fas fa-phone"></i> +256 772 572693</p>
+            <button class="btn btn-outline" style="margin-top: 0.8rem; padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="copyText('+256772572693')">
+              <i class="fas fa-copy"></i> Copy Phone Number
+            </button>
+          </div>
+          <div style="padding: 1.2rem; background: var(--bg-surface); border-radius: var(--radius-md); border: 1.5px solid var(--border-subtle);">
+            <h4><i class="fas fa-map-marker-alt" style="color: var(--accent-gold);"></i> Head Office</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Komamboga, Gayaza Road, Kampala, Uganda</p>
+            <p style="margin-top: 0.8rem;"><i class="fas fa-envelope"></i> P.O. Box 34214, Kampala</p>
+            <p style="margin-top: 0.4rem; font-size: 0.85rem; color: var(--accent-gold);"><i class="fas fa-globe"></i> Affiliations: COFTU, PSI, ILO, IUF</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 3: WORKPLACE GRIEVANCE REPORTING PORTAL
+         ========================================================================== -->
+    <section id="page-grievance" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">Confidential Intake</span>
+        <h2 class="section-title">Report a Workplace Dispute or Grievance</h2>
+        <p class="section-desc">Lodge unfair labour practice complaints directly with the UFABWU Legal & Grievance Department.</p>
+      </div>
+
+      <div class="glass-card" style="max-width: 850px; margin: 0 auto; padding: 2.5rem;">
+        <form id="grievanceForm" onsubmit="handleGrievanceSubmit(event)">
+          <div class="form-group">
+            <label for="gName"><i class="fas fa-user"></i> Worker Full Name *</label>
+            <input type="text" id="gName" class="form-control" placeholder="Enter your name" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group">
+              <label for="gPhone"><i class="fas fa-phone"></i> Phone Number *</label>
+              <input type="tel" id="gPhone" class="form-control" placeholder="+256 700 000000" required>
+            </div>
+            <div class="form-group">
+              <label for="gEmployer"><i class="fas fa-building"></i> Employer / Enterprise Name *</label>
+              <input type="text" id="gEmployer" class="form-control" placeholder="e.g. Mukwano Agro Industries" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group">
+              <label for="gCategory"><i class="fas fa-tag"></i> Violation Category *</label>
+              <select id="gCategory" class="form-control" required>
+                <option value="Wrongful Dismissal">Wrongful Dismissal / Termination</option>
+                <option value="Unpaid Wages">Unpaid Wages / Overtime Default</option>
+                <option value="Workplace Injury">Workplace Injury Compensation Claim</option>
+                <option value="Safety Hazard">Unsafe Working Conditions / Lack of PPE</option>
+                <option value="Harassment">Union Discrimination or Harassment</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="gDistrict"><i class="fas fa-map-marker-alt"></i> District / Location *</label>
+              <input type="text" id="gDistrict" class="form-control" placeholder="e.g. Jinja / Mukono" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="gDetails"><i class="fas fa-align-left"></i> Incident Description & Timeline *</label>
+            <textarea id="gDetails" class="form-control" rows="5" placeholder="Provide detailed summary of the incident..." required></textarea>
+          </div>
+
+          <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+            <input type="checkbox" id="gConfidential" required style="margin-top: 4px;">
+            <label for="gConfidential" style="font-size: 0.88rem; font-weight: normal;">
+              I certify that these details are true and request UFABWU legal representation under Labour Law LUN 38.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <i class="fas fa-paper-plane"></i> Submit Grievance & Generate Tracking Ticket
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 4: DOCUMENT DOWNLOAD & RESOURCE CENTER
+         ========================================================================== -->
+    <section id="page-resources" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">Official Publications</span>
+        <h2 class="section-title">UFABWU Policy & Document Library</h2>
+        <p class="section-desc">Download official constitution documents, CBA contract templates, and labour law summaries.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap" style="color:#EF4444; background:rgba(239, 68, 68, 0.12); border-color:rgba(239, 68, 68, 0.3);">
+            <i class="fas fa-file-pdf"></i>
+          </div>
+          <span class="pill-badge" style="margin-bottom:0.6rem;">Constitutional Policy</span>
+          <h3 class="feature-title">UFABWU Union Constitution (PDF)</h3>
+          <p class="feature-text">Official constitution governing Delegates Conference, NEC organ elections, member rights, and branch procedures.</p>
+          <button class="btn btn-outline" style="margin-top:1.2rem; width:100%;" onclick="downloadResource('UFABWU Constitution (PDF)')">
+            <i class="fas fa-download"></i> Download PDF (2.4 MB)
+          </button>
+        </div>
+
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap" style="color:#EF4444; background:rgba(239, 68, 68, 0.12); border-color:rgba(239, 68, 68, 0.3);">
+            <i class="fas fa-file-contract"></i>
+          </div>
+          <span class="pill-badge" style="margin-bottom:0.6rem;">Standard Template</span>
+          <h3 class="feature-title">Model CBA Agreement Standard (PDF)</h3>
+          <p class="feature-text">Template Collective Bargaining Agreement contract for agricultural enterprises, plantations, and processors.</p>
+          <button class="btn btn-outline" style="margin-top:1.2rem; width:100%;" onclick="downloadResource('Standard CBA Template (PDF)')">
+            <i class="fas fa-download"></i> Download PDF (1.8 MB)
+          </button>
+        </div>
+
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap" style="color:#EF4444; background:rgba(239, 68, 68, 0.12); border-color:rgba(239, 68, 68, 0.3);">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <span class="pill-badge" style="margin-bottom:0.6rem;">Safety Manual</span>
+          <h3 class="feature-title">Occupational Health & Safety Guide</h3>
+          <p class="feature-text">Comprehensive OSH manual for pesticide handling, heavy machinery operation, and plantation injury prevention.</p>
+          <button class="btn btn-outline" style="margin-top:1.2rem; width:100%;" onclick="downloadResource('OSH Safety Guide (PDF)')">
+            <i class="fas fa-download"></i> Download PDF (3.2 MB)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 5: COMMERCIAL MEMBER WELFARE & SACCO PERKS
+         ========================================================================== -->
+    <section id="page-perks" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">Commercial Welfare</span>
+        <h2 class="section-title">Member Financial Perks & Savings SACCO</h2>
+        <p class="section-desc">Exclusive commercial benefits, micro-credit access, and emergency relief programs for active members.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap"><i class="fas fa-coins"></i></div>
+          <h3 class="feature-title">Agro-Workers SACCO Loans</h3>
+          <p class="feature-text">Access low-interest credit for agricultural equipment, school fees, and small business expansion with flexible repayment.</p>
+        </div>
+
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap"><i class="fas fa-heartbeat"></i></div>
+          <h3 class="feature-title">Group Health & Medical Cover</h3>
+          <p class="feature-text">Subsidized inpatient and outpatient medical insurance for farm workers and their registered immediate families.</p>
+        </div>
+
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrap"><i class="fas fa-user-graduate"></i></div>
+          <h3 class="feature-title">Education Bursary Grants</h3>
+          <p class="feature-text">Annual bursary awards supporting children of active union members attending secondary and vocational institutions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 6: EVENTS & CONVENTIONS CALENDAR
+         ========================================================================== -->
+    <section id="page-events" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">Calendar of Events</span>
+        <h2 class="section-title">Upcoming Union Conferences & Workshops</h2>
+        <p class="section-desc">Join national rallies, shop steward training workshops, and tripartite forums across Uganda.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 900px; margin: 0 auto;">
+        <div class="glass-card" style="padding: 1.8rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem;">
+          <div style="display: flex; gap: 1.5rem; align-items: center;">
+            <div style="background: var(--primary-main); color: var(--accent-gold); padding: 1rem 1.2rem; border-radius: var(--radius-md); text-align: center; font-family: 'Outfit';">
+              <span style="font-size: 1.8rem; font-weight: 800; display: block;">15</span>
+              <span style="font-size: 0.8rem; text-transform: uppercase;">SEP 2026</span>
+            </div>
+            <div>
+              <span class="pill-badge">National Convention</span>
+              <h3 style="margin-top: 0.4rem;">Quinquennial National Delegates Conference</h3>
+              <p style="color: var(--text-secondary); font-size: 0.9rem;"><i class="fas fa-map-marker-alt"></i> Kampala Head Office Secretariat</p>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="rsvpEvent('Quinquennial National Delegates Conference')">
+            <i class="fas fa-calendar-check"></i> RSVP Event
+          </button>
+        </div>
+
+        <div class="glass-card" style="padding: 1.8rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem;">
+          <div style="display: flex; gap: 1.5rem; align-items: center;">
+            <div style="background: var(--primary-main); color: var(--accent-gold); padding: 1rem 1.2rem; border-radius: var(--radius-md); text-align: center; font-family: 'Outfit';">
+              <span style="font-size: 1.8rem; font-weight: 800; display: block;">07</span>
+              <span style="font-size: 0.8rem; text-transform: uppercase;">OCT 2026</span>
+            </div>
+            <div>
+              <span class="pill-badge">Global Rally</span>
+              <h3 style="margin-top: 0.4rem;">World Day for Decent Work Rally & Summit</h3>
+              <p style="color: var(--text-secondary); font-size: 0.9rem;"><i class="fas fa-map-marker-alt"></i> Jinja Industrial Grounds</p>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="rsvpEvent('World Day for Decent Work Rally')">
+            <i class="fas fa-calendar-check"></i> RSVP Event
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 7: BRANCHES DIRECTORY
+         ========================================================================== -->
+    <section id="page-branches" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">National Network</span>
+        <h2 class="section-title">UFABWU Branch Directory</h2>
+        <p class="section-desc">Search and filter active union branches and regional offices across Uganda.</p>
+      </div>
+
+      <!-- Search & Filter Controls -->
+      <div class="filter-bar">
+        <div class="chip-group" id="regionChips">
+          <button class="chip-btn active" data-region="all">All Regions</button>
+          <button class="chip-btn" data-region="central">Central Region</button>
+          <button class="chip-btn" data-region="eastern">Eastern Region</button>
+          <button class="chip-btn" data-region="northern">Northern Region</button>
+          <button class="chip-btn" data-region="western">Western Region</button>
+          <button class="chip-btn" data-region="westnile">West Nile</button>
+        </div>
+        <div style="min-width: 250px;">
+          <input type="text" id="branchSearchInput" class="form-control" placeholder="🔍 Search by district or branch..." onkeyup="filterBranches()">
+        </div>
+      </div>
+
+      <!-- Branch Cards Container -->
+      <div class="branch-grid" id="branchGrid">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 8: DUES & BENEFITS CALCULATOR
+         ========================================================================== -->
+    <section id="page-calculator" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">Transparency Tool</span>
+        <h2 class="section-title">Interactive Dues & Benefits Calculator</h2>
+        <p class="section-desc">Calculate estimated monthly union dues and discover your full protection benefits.</p>
+      </div>
+
+      <div class="glass-card calculator-box">
+        <div>
+          <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-sliders-h" style="color:var(--accent-gold);"></i> Input Your Employment Details</h3>
+          
+          <div class="form-group">
+            <label for="calcSalary"><i class="fas fa-money-bill-wave"></i> Gross Monthly Salary (UGX)</label>
+            <input type="number" id="calcSalary" class="form-control" value="500000" step="50000" oninput="calculateDues()">
+          </div>
+
+          <div class="form-group">
+            <label for="calcSector"><i class="fas fa-briefcase"></i> Employment Sector</label>
+            <select id="calcSector" class="form-control" onchange="calculateDues()">
+              <option value="public">Public Service / MAAIF Agency</option>
+              <option value="private_crop">Private Commercial Crop Plantation (Tea, Sugar, Coffee)</option>
+              <option value="private_animal">Animal & Livestock Farm</option>
+              <option value="agro_processing">Agro-Processing & Value Addition Enterprise</option>
+              <option value="poultry_fish">Poultry & Aquaculture</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="calcExperience"><i class="fas fa-calendar-alt"></i> Expected Membership Duration</label>
+            <select id="calcExperience" class="form-control" onchange="calculateDues()">
+              <option value="1">1 Year Protection</option>
+              <option value="3">3 Years Protection</option>
+              <option value="5">5+ Years (Full Welfare Tier)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc-result-card">
+          <div>
+            <span class="pill-badge" style="background:rgba(255,255,255,0.15); color:#FFF; border:none;">
+              Estimated Dues Breakdown
+            </span>
+            <div class="calc-amount" id="dueAmount">UGX 10,000</div>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;" id="dueRateText">Based on standard union statutory rate (approx 2.0%)</p>
+          </div>
+
+          <div style="margin: 1.5rem 0;">
+            <div class="benefit-item">
+              <i class="fas fa-check-circle"></i>
+              <span id="b1">100% Free Legal Representation for Industrial Disputes</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-check-circle"></i>
+              <span id="b2">Collective Bargaining Agreement (CBA) Wage Coverage</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-check-circle"></i>
+              <span id="b3">Emergency Member Relief Fund Eligibility</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-check-circle"></i>
+              <span id="b4">International ILO Workers Rights Protection</span>
+            </div>
+          </div>
+
+          <a href="#join" class="btn btn-primary" style="width:100%; text-align:center;" onclick="navigateTo('join')">
+            <i class="fas fa-user-plus"></i> Join UFABWU With Calculated Details
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 9: MEMBERSHIP REGISTRATION & DIGITAL ID CARD GENERATOR
+         ========================================================================== -->
+    <section id="page-join" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">Instant Membership Portal</span>
+        <h2 class="section-title">Join UFABWU & Generate Digital Member ID</h2>
+        <p class="section-desc">Complete the registration form to preview your official digital union ID card.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.5rem; align-items: start;">
+        
+        <!-- Registration Form Wizard -->
+        <div class="glass-card" style="padding: 2.5rem;">
+          <div class="wizard-steps">
+            <div class="step-node active" id="node1">1</div>
+            <div class="step-node" id="node2">2</div>
+            <div class="step-node" id="node3">3</div>
+          </div>
+
+          <form id="joinWizardForm" onsubmit="handleWizardSubmit(event)">
+            <!-- Step 1 -->
+            <div id="step1" class="wizard-step">
+              <h3 style="margin-bottom: 1.2rem;">Step 1: Personal Identification</h3>
+              <div class="form-group">
+                <label for="mName">Full Legal Name *</label>
+                <input type="text" id="mName" class="form-control" placeholder="e.g. Mukasa John Baptist" required oninput="updateIDCardPreview()">
+              </div>
+              <div class="form-group">
+                <label for="mNIN">National ID (NIN) / ID Number *</label>
+                <input type="text" id="mNIN" class="form-control" placeholder="CM98023100XXXX" required oninput="updateIDCardPreview()">
+              </div>
+              <div class="form-group">
+                <label for="mPhone">Phone Number *</label>
+                <input type="tel" id="mPhone" class="form-control" placeholder="+256 700 000000" required>
+              </div>
+              <button type="button" class="btn btn-primary" onclick="goToStep(2)">Next: Employment Info <i class="fas fa-arrow-right"></i></button>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="step2" class="wizard-step" style="display: none;">
+              <h3 style="margin-bottom: 1.2rem;">Step 2: Employment & Sector</h3>
+              <div class="form-group">
+                <label for="mSector">Agricultural Sector *</label>
+                <select id="mSector" class="form-control" required onchange="updateIDCardPreview()">
+                  <option value="Tea & Sugar Plantation">Tea & Sugar Plantation</option>
+                  <option value="Public Service / MAAIF">Public Service / MAAIF</option>
+                  <option value="Commercial Crop Farm">Commercial Crop Farm</option>
+                  <option value="Livestock & Animal Farm">Livestock & Animal Farm</option>
+                  <option value="Agro-Processing Unit">Agro-Processing Unit</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="mEmployer">Employer / Enterprise Name *</label>
+                <input type="text" id="mEmployer" class="form-control" placeholder="e.g. Kakira Sugar Ltd" required>
+              </div>
+              <div style="display: flex; gap: 1rem;">
+                <button type="button" class="btn btn-outline" onclick="goToStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
+                <button type="button" class="btn btn-primary" onclick="goToStep(3)">Next: Branch Selection <i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div id="step3" class="wizard-step" style="display: none;">
+              <h3 style="margin-bottom: 1.2rem;">Step 3: Branch & Verification</h3>
+              <div class="form-group">
+                <label for="mBranch">Preferred Branch *</label>
+                <select id="mBranch" class="form-control" required onchange="updateIDCardPreview()">
+                  <option value="Kampala Central Branch">Kampala Central Branch</option>
+                  <option value="Jinja Agro Branch">Jinja Agro Branch</option>
+                  <option value="Mbarara Western Branch">Mbarara Western Branch</option>
+                  <option value="Gulu Agricultural Branch">Gulu Agricultural Branch</option>
+                  <option value="Mukono Plantations Branch">Mukono Plantations Branch</option>
+                </select>
+              </div>
+              <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                <input type="checkbox" id="mConsent" required style="margin-top: 4px;">
+                <label for="mConsent" style="font-size: 0.88rem; font-weight: normal;">
+                  I hereby authorize UFABWU to register me as an active member and represent my rights under Labour Union Law LUN 38.
+                </label>
+              </div>
+              <div style="display: flex; gap: 1rem;">
+                <button type="button" class="btn btn-outline" onclick="goToStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i> Submit & Print ID Card</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Live Digital Card Graphic -->
+        <div>
+          <div style="text-align: center; margin-bottom: 1rem;">
+            <span class="pill-badge"><i class="fas fa-magic"></i> Live Digital ID Card Preview</span>
+          </div>
+          
+          <div class="id-card-preview" id="idCardGraphic">
+            <div class="id-card-header">
+              <div>
+                <strong style="font-size: 1.1rem; color:var(--accent-gold);">UFABWU UNION CARD</strong>
+                <div style="font-size: 0.72rem; opacity: 0.8;">Uganda Farm Workers Union · LUN 38</div>
+              </div>
+              <i class="fas fa-seedling" style="font-size: 1.8rem; color: var(--accent-gold);"></i>
+            </div>
+
+            <div style="display: flex; gap: 1.2rem; align-items: center;">
+              <div class="id-card-photo-placeholder">
+                <i class="fas fa-user"></i>
+              </div>
+              <div>
+                <div style="font-size: 0.75rem; text-transform: uppercase; opacity: 0.7;">Member Name</div>
+                <strong style="font-size: 1.15rem; color: #FFF;" id="previewCardName">MUKASA JOHN BAPTIST</strong>
+                
+                <div style="margin-top: 0.5rem; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7;">ID Number</div>
+                <div style="font-family: monospace; font-weight: bold; color: var(--accent-gold);" id="previewCardID">UFAB-2026-8942</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.2rem; padding-top: 0.8rem; border-top: 1px dashed rgba(255,255,255,0.2); display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.8rem;">
+              <div>
+                <span style="opacity: 0.7; display: block;">Sector:</span>
+                <strong id="previewCardSector">Tea & Sugar Plantation</strong>
+              </div>
+              <div>
+                <span style="opacity: 0.7; display: block;">Branch:</span>
+                <strong id="previewCardBranch">Kampala Central</strong>
+              </div>
+            </div>
+
+            <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; opacity: 0.8;">
+              <span>Issued: AUG 2026</span>
+              <span style="color: var(--accent-gold); font-weight: bold;">OFFICIAL MEMBER</span>
+            </div>
+          </div>
+
+          <button class="btn btn-outline" style="width: 100%; margin-top: 1.2rem;" onclick="printDigitalCard()">
+            <i class="fas fa-print"></i> Download / Print Digital Card
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 10: NEWS & LEGAL DISPUTES FEED
+         ========================================================================== -->
+    <section id="page-news" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">Latest Updates</span>
+        <h2 class="section-title">News & Collective Bargaining Victories</h2>
+        <p class="section-desc">Stay informed on policy changes, legal disputes won, and community sensitization events.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="glass-card feature-card">
+          <span class="pill-badge" style="margin-bottom: 0.8rem;">Collective Bargaining</span>
+          <h3 class="feature-title">New CBA Signed for Plantation Workers</h3>
+          <p class="feature-text">UFABWU successfully negotiated a 14% wage increase and improved medical safety gear allowances for over 2,500 tea estate workers.</p>
+          <a href="#" style="color: var(--accent-gold); font-weight: bold; margin-top: 1rem; display: inline-block;" onclick="openNewsModal('CBA Signed for Plantation Workers', 'UFABWU has finalized a groundbreaking Collective Bargaining Agreement (CBA) with major agricultural enterprises...')">Read Article <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="glass-card feature-card">
+          <span class="pill-badge" style="margin-bottom: 0.8rem;">Legal Rights</span>
+          <h3 class="feature-title">Industrial Court Reinstates 45 Displaced Workers</h3>
+          <p class="feature-text">Our legal defense team achieved a landmark victory restoring full compensation and jobs for unfairly dismissed processing plant staff.</p>
+          <a href="#" style="color: var(--accent-gold); font-weight: bold; margin-top: 1rem; display: inline-block;" onclick="openNewsModal('Industrial Court Reinstates 45 Displaced Workers', 'In a major victory for labour rights in Uganda, the Industrial Court ruled in favour of UFABWU members...')">Read Article <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="glass-card feature-card">
+          <span class="pill-badge" style="margin-bottom: 0.8rem;">Capacity Building</span>
+          <h3 class="feature-title">National Shop Stewards Workshop Held in Jinja</h3>
+          <p class="feature-text">Over 120 elected shop stewards gathered for intensive training on grievance handling, ILO conventions, and workplace safety audits.</p>
+          <a href="#" style="color: var(--accent-gold); font-weight: bold; margin-top: 1rem; display: inline-block;" onclick="openNewsModal('National Shop Stewards Workshop', 'Shop stewards from across 5 regions completed comprehensive capacity building workshops...')">Read Article <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 11: MEDIA GALLERY
+         ========================================================================== -->
+    <section id="page-gallery" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">Visual Archive</span>
+        <h2 class="section-title">UFABWU Field Operations Gallery</h2>
+        <p class="section-desc">Authentic photo record of union activities, CBA negotiations, field sensitization drives, and regional workshops.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card" onclick="openLightbox('images/cba_signing.jpg', 'UFABWU Collective Bargaining Agreement (CBA) Signing Ceremony')">
+          <img src="images/cba_signing.jpg" alt="CBA Signing Ceremony" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>CBA Signing Ceremony</h4>
+            <small>Kampala National Secretariat</small>
+          </div>
+        </div>
+
+        <div class="gallery-card" onclick="openLightbox('images/field_delegates.jpg', 'Field Sensitization & Member Assembly')">
+          <img src="images/field_delegates.jpg" alt="Field Delegates Assembly" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Field Sensitization Meeting</h4>
+            <small>Mukono & Jinja Agricultural Schemes</small>
+          </div>
+        </div>
+
+        <div class="gallery-card" onclick="openLightbox('images/ufabwu_hero_bg.jpg', 'Agricultural Enterprise Workplace Safety Inspection')">
+          <img src="images/ufabwu_hero_bg.jpg" alt="Plantation Inspection" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Workplace Safety Inspection</h4>
+            <small>Uganda Commercial Agro Enterprises</small>
+          </div>
+        </div>
+
+        <div class="gallery-card" onclick="openLightbox('https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1200&q=80', 'Shop Stewards Capacity Workshop')">
+          <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=600&q=80" alt="Training Workshop" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Capacity Training Workshop</h4>
+            <small>Jinja Regional Office</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 12: SEARCHABLE FAQ
+         ========================================================================== -->
+    <section id="page-faq" class="page-section">
+      <div class="section-header">
+        <span class="section-subtitle">Got Questions?</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Learn about union dues, legal protections, member eligibility, and employer relations.</p>
+      </div>
+
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="glass-card" style="padding: 1rem 1.5rem; margin-bottom: 1.5rem;" onclick="toggleAccordion(this)">
+          <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+            <h4><i class="fas fa-question-circle" style="color: var(--accent-gold);"></i> Who is eligible to join UFABWU?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer" style="display: none; margin-top: 1rem; color: var(--text-secondary); border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+            All workers employed in the agricultural sector in Uganda — including public service (MAAIF), private commercial crop plantations, livestock farms, poultry, fish farms, and agro-processing factories — are eligible to join.
+          </div>
+        </div>
+
+        <div class="glass-card" style="padding: 1rem 1.5rem; margin-bottom: 1.5rem;" onclick="toggleAccordion(this)">
+          <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+            <h4><i class="fas fa-question-circle" style="color: var(--accent-gold);"></i> How are union dues deducted and calculated?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer" style="display: none; margin-top: 1rem; color: var(--text-secondary); border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+            Union dues are calculated as a small statutory percentage (approx 2%) of a member's basic monthly wage and are deducted directly via check-off agreement or paid via branch steward accounts. Use our interactive Dues Calculator tool for exact figures.
+          </div>
+        </div>
+
+        <div class="glass-card" style="padding: 1rem 1.5rem; margin-bottom: 1.5rem;" onclick="toggleAccordion(this)">
+          <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+            <h4><i class="fas fa-question-circle" style="color: var(--accent-gold);"></i> What legal protection does UFABWU provide?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer" style="display: none; margin-top: 1rem; color: var(--text-secondary); border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+            UFABWU provides free legal aid representation in the Industrial Court, handles wrongful termination disputes, negotiates compensation for occupational injuries, and enforces Collective Bargaining Agreements (CBAs).
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FLOATING AI CHATBOT HELPDESK WIDGET -->
+  <div class="chat-fab" id="chatFab" onclick="toggleChatWindow()" title="Open UFABWU Virtual Assistant">
+    <i class="fas fa-comments"></i>
+  </div>
+
+  <div class="chat-box-window" id="chatWindow">
+    <div class="chat-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <i class="fas fa-robot" style="color: var(--accent-gold); font-size: 1.2rem;"></i>
+        <div>
+          <strong style="font-size: 0.95rem;">UFABWU Virtual Helpline</strong>
+          <div style="font-size: 0.72rem; opacity: 0.8;">Online · Instant Answers</div>
+        </div>
+      </div>
+      <button class="icon-btn" style="width: 32px; height: 32px;" onclick="toggleChatWindow()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg bot">
+        👋 Hello! Welcome to UFABWU Virtual Helpline. How can I assist you today? You can ask me about union history, reporting a workplace dispute, finding a local branch, union dues, or joining UFABWU.
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" id="chatInput" placeholder="Type message..." onkeypress="if(event.key==='Enter') sendChatMessage()">
+      <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;" onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- SPOTLIGHT SEARCH MODAL (Ctrl + K) -->
+  <div class="search-modal" id="searchModal">
+    <div class="search-box-card">
+      <div class="search-input-wrap">
+        <i class="fas fa-search" style="color: var(--accent-gold); font-size: 1.2rem;"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search pages, FAQs, branches, dues calculator..." oninput="handleGlobalSearch()">
+        <span style="font-size: 0.75rem; background: var(--border-subtle); padding: 4px 8px; border-radius: 6px; font-weight: bold;">ESC</span>
+      </div>
+      <div class="search-results-list" id="searchResultsList">
+        <div style="text-align: center; color: var(--text-muted); padding: 2rem;">
+          Type to search across the entire UFABWU portal...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO LIGHTBOX MODAL -->
+  <div class="video-modal-backdrop" id="videoModalBackdrop" onclick="closeVideoModal()">
+    <div class="video-modal-card" onclick="event.stopPropagation()">
+      <div style="padding: 1rem 1.5rem; background: var(--primary-dark); color: #FFF; display: flex; justify-content: space-between; align-items: center;">
+        <h4 id="videoModalTitle" style="font-size: 1.1rem; color: var(--accent-gold);">UFABWU Documentary Video</h4>
+        <button class="icon-btn" style="width: 32px; height: 32px;" onclick="closeVideoModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+        <iframe id="videoModalIframe" style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Zoomed view">
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo" style="margin-bottom: 1rem;">
+            <div class="logo-icon-wrap"><i class="fas fa-seedling"></i></div>
+            <span>UFABWU</span>
+          </div>
+          <p style="font-size: 0.92rem; line-height: 1.6;">
+            Uganda Farm & Agro-Based Workers’ Union (LUN 38). Dedicated to organizing, defending, and improving working conditions for agricultural workers nationwide.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home" onclick="navigateTo('home')">Home</a></li>
+            <li><a href="#about" onclick="navigateTo('about')">Background & Leadership</a></li>
+            <li><a href="#branches" onclick="navigateTo('branches')">Branch Directory</a></li>
+            <li><a href="#grievance" onclick="navigateTo('grievance')">Report Dispute</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Enterprise Resources</h4>
+          <ul class="footer-links">
+            <li><a href="#resources" onclick="navigateTo('resources')">Document Downloads</a></li>
+            <li><a href="#perks" onclick="navigateTo('perks')">SACCO Welfare Perks</a></li>
+            <li><a href="#events" onclick="navigateTo('events')">Events & Rallies</a></li>
+            <li><a href="#join" onclick="navigateTo('join')">Generate Digital ID</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">International Affiliations</h4>
+          <p style="font-size: 0.88rem; margin-bottom: 1rem;">
+            Affiliated to National & International federations: COFTU, PSI, ILO, IUF, UISTAACT (France).
+          </p>
+          <div class="pill-badge" style="background: rgba(255,255,255,0.08); color: #FFF; border-color: rgba(255,255,255,0.2);">
+            <i class="fas fa-globe"></i> Global Solidarity
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+        <div>&copy; 2026 UFABWU · Uganda Farm & Agro-Based Workers’ Union. All rights reserved.</div>
+        <div>LUN 38 · Registered 29 Dec 2006</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC & DYNAMIC INTERACTION
+       ========================================================================== -->
+  <script>
+    // --- 1. Multi-Language Translations ---
+    const i18n = {
+      en: {
+        title: "Organizing & Defending Uganda’s Agro Workers",
+        sub: "We empower agricultural workers across plantations, private farms, processing enterprises, and public service through collective bargaining, legal advocacy, and sustainable skills."
+      },
+      lg: {
+        title: "Okulungamya n'Okukuuma Abakozi b'oMu Bulimi mu Uganda",
+        sub: "Tuwa abakozi b'omu bulimi amaanyi mu faamu, fukitole, n'ebitongole by'obwapulezidenti okuyita mu kuteesa, n'amateeka."
+      },
+      sw: {
+        title: "Kuandaa na Kutetea Wafanyakazi wa Kilimo Uganda",
+        sub: "Tunawawezesha wafanyakazi wa kilimo katika mashamba, viwanda vya kusindika, na huduma za umma kupitia majadiliano ya pamoja na sheria."
+      }
+    };
+
+    function changeLanguage(lang) {
+      if (i18n[lang]) {
+        document.getElementById('homeHeroTitle').innerHTML = i18n[lang].title.replace("Uganda’s Agro Workers", "<span class='highlight'>Uganda’s Agro Workers</span>");
+        document.getElementById('homeHeroSub').textContent = i18n[lang].sub;
+        showToast(`Language set to ${lang === 'lg' ? 'Luganda' : lang === 'sw' ? 'Kiswahili' : 'English'}`, 'info');
+      }
+    }
+
+    // --- 2. Branch Data Database ---
+    const branchData = [
+      { id: 1, name: "Kampala Central Branch", district: "Kampala", region: "central", leader: "Nelson Wafana", phone: "+256 772 518902", sector: "Public Service & MAAIF" },
+      { id: 2, name: "Jinja Agro-Enterprise Branch", district: "Jinja", region: "eastern", leader: "Okello David", phone: "+256 701 443210", sector: "Sugar & Crop Processing" },
+      { id: 3, name: "Mukono Plantation Branch", district: "Mukono", region: "central", leader: "Nalubega Sarah", phone: "+256 774 990123", sector: "Tea & Coffee Estate" },
+      { id: 4, name: "Mbarara Western Branch", district: "Mbarara", region: "western", leader: "Turyatemba Joseph", phone: "+256 782 119844", sector: "Livestock & Dairy Farms" },
+      { id: 5, name: "Gulu Agricultural Branch", district: "Gulu", region: "northern", leader: "Akena Patrick", phone: "+256 773 665421", sector: "Cereal & Grain Farms" },
+      { id: 6, name: "Arua West Nile Branch", district: "Arua", region: "westnile", leader: "Draku Michael", phone: "+256 702 334988", sector: "Tobacco & Produce Enterprise" },
+      { id: 7, name: "Kasese Irrigation Branch", district: "Kasese", region: "western", leader: "Masereka Peter", phone: "+256 781 556732", sector: "Cotton & Horticultural Scheme" },
+      { id: 8, name: "Mbale Bugisu Branch", district: "Mbale", region: "eastern", leader: "Wamono Timothy", phone: "+256 775 889012", sector: "Arabica Coffee Cooperative" }
+    ];
+
+    // --- 3. Navigation & Page Router ---
+    function navigateTo(pageId) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+      const targetPage = document.getElementById('page-' + pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
+
+      // Sync active state across all navigation links & pills
+      document.querySelectorAll('[data-page]').forEach(item => {
+        if (item.getAttribute('data-page') === pageId) {
+          item.classList.add('active');
+          if (item.classList.contains('nav-tab-pill')) {
+            item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      // Update URL hash without breaking page position
+      if (history.pushState) {
+        history.pushState(null, null, '#' + pageId);
+      } else {
+        window.location.hash = pageId;
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function scrollTabs(direction) {
+      const container = document.getElementById('tabsScrollContainer');
+      if (container) {
+        container.scrollBy({ left: direction * 240, behavior: 'smooth' });
+      }
+    }
+
+    // Hash navigation listener & Initial setup
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) navigateTo(hash);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '') || 'home';
+      navigateTo(hash);
+    });
+
+    // --- 4. Mobile Drawer Controls ---
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      mobileDrawer.classList.add('open');
+      drawerOverlay.classList.add('active');
+    });
+    function closeMobileMenu() {
+      mobileDrawer.classList.remove('open');
+      drawerOverlay.classList.remove('active');
+    }
+    document.getElementById('closeDrawerBtn').addEventListener('click', closeMobileMenu);
+    drawerOverlay.addEventListener('click', closeMobileMenu);
+
+    // --- 5. Theme Toggle ---
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    let currentTheme = localStorage.getItem('ufabwu_theme') || 'light';
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('ufabwu_theme', theme);
+      themeToggleBtn.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    applyTheme(currentTheme);
+    themeToggleBtn.addEventListener('click', () => {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(currentTheme);
+      showToast(`Switched to ${currentTheme} mode`, 'info');
+    });
+
+    // --- 6. Grievance Form Submission & Ticket Generation ---
+    async function apiPost(url, data, btn) {
+      const original = btn ? btn.innerHTML : null;
+      if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...'; }
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        if (!res.ok || !json.ok) throw new Error(json.error || 'Request failed');
+        return json;
+      } catch (err) {
+        alert(`⚠️ Could not send your request.\n\n${err.message}\n\nPlease check that the UFABWU backend is running, then try again.`);
+        return null;
+      } finally {
+        if (btn) { btn.disabled = false; btn.innerHTML = original; }
+      }
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('cName').value;
+      const submitBtn = document.querySelector('#homeContactForm button[type="submit"]');
+
+      apiPost('/api/contact', {
+        name,
+        phone: document.getElementById('cPhone').value,
+        email: document.getElementById('cEmail').value,
+        subject: document.getElementById('cSubject').value,
+        message: document.getElementById('cMessage').value
+      }, submitBtn).then(json => {
+        if (!json) return;
+        const refId = json.refId;
+        alert(`✅ Message Sent Successfully!\n\nReference ID: ${refId}\nSender: ${name}\nStatus: FORWARDED TO NATIONAL SECRETARIAT\n\nThank you for reaching out to UFABWU. Our team will contact you shortly.`);
+        showToast(`Contact message sent! Reference: ${refId}`, 'success');
+        document.getElementById('homeContactForm').reset();
+      });
+    }
+
+    function handleGrievanceSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('gName').value;
+      const submitBtn = document.querySelector('#grievanceForm button[type="submit"]');
+
+      apiPost('/api/grievance', {
+        name,
+        phone: document.getElementById('gPhone').value,
+        employer: document.getElementById('gEmployer').value,
+        category: document.getElementById('gCategory').value,
+        district: document.getElementById('gDistrict').value,
+        details: document.getElementById('gDetails').value
+      }, submitBtn).then(json => {
+        if (!json) return;
+        const ticketId = json.ticketId;
+        alert(`✅ Dispute Submitted Successfully!\n\nTracking Ticket ID: ${ticketId}\nWorker Name: ${name}\nStatus: ASSIGNED TO LEGAL DEPARTMENT\n\nPlease keep your tracking code safe.`);
+        showToast(`Grievance ticket created: ${ticketId}`, 'success');
+        document.getElementById('grievanceForm').reset();
+      });
+    }
+
+    function downloadResource(docName) {
+      const files = {
+        'UFABWU Constitution (PDF)': 'UFABWU-Constitution.pdf',
+        'Standard CBA Template (PDF)': 'Standard-CBA-Template.pdf',
+        'OSH Safety Guide (PDF)': 'OSH-Safety-Guide.pdf'
+      };
+      const file = files[docName];
+      if (!file) {
+        showToast(`Download not available yet: ${docName}`, 'info');
+        return;
+      }
+      window.location.href = '/downloads/' + encodeURIComponent(file);
+      showToast(`Downloading: ${docName}`, 'success');
+    }
+
+    function rsvpEvent(eventName) {
+      showToast(`🎉 RSVP Confirmed for: ${eventName}`, 'success');
+    }
+
+    // --- 7. Chatbot Virtual Helpline Logic ---
+    function toggleChatWindow() {
+      document.getElementById('chatWindow').classList.toggle('open');
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const body = document.getElementById('chatBody');
+
+      // Add user message
+      const uMsg = document.createElement('div');
+      uMsg.className = 'chat-msg user';
+      uMsg.textContent = text;
+      body.appendChild(uMsg);
+
+      input.value = '';
+      body.scrollTop = body.scrollHeight;
+
+      // Generate bot response
+      setTimeout(() => {
+        const bMsg = document.createElement('div');
+        bMsg.className = 'chat-msg bot';
+        
+        const q = text.toLowerCase();
+        if (q.includes('history') || q.includes('background') || q.includes('founded') || q.includes('started')) {
+          bMsg.textContent = "UFABWU was registered on 29th December 2006 as Labour Union No. 38 (LUN 38) under the Labour Unions Act of 2006 to organize and defend agricultural workers across Uganda.";
+        } else if (q.includes('dispute') || q.includes('grievance') || q.includes('dismissed') || q.includes('fire')) {
+          bMsg.textContent = "To report a workplace dispute or unfair termination, click 'Report Dispute' in the navigation bar to submit a confidential claim for legal aid representation.";
+        } else if (q.includes('due') || q.includes('fee') || q.includes('pay') || q.includes('cost')) {
+          bMsg.textContent = "Union dues are statutory at approx 2.0% of your gross monthly wage. Try our Dues Calculator on the site for an exact breakdown!";
+        } else if (q.includes('branch') || q.includes('location') || q.includes('office')) {
+          bMsg.textContent = "UFABWU has over 50 active branches across Uganda (Kampala, Jinja, Mukono, Mbarara, Gulu, Arua, Kasese). Check our Branch Directory to find contacts!";
+        } else if (q.includes('wafana') || q.includes('leader') || q.includes('general secretary')) {
+          bMsg.textContent = "Our General Secretary is Mr. Nelson Wafana Makwasi. You can reach the National Secretariat at +256 772 518902 or P.O. Box 34214 Kampala.";
+        } else {
+          bMsg.textContent = "Thank you for reaching out to UFABWU Helpline! For immediate assistance, contact our secretariat at +256 772 518902 or generate your Membership ID online.";
+        }
+
+        body.appendChild(bMsg);
+        body.scrollTop = body.scrollHeight;
+      }, 700);
+    }
+
+    // --- 8. Render Branch Directory ---
+    function renderBranches(branches) {
+      const grid = document.getElementById('branchGrid');
+      grid.innerHTML = '';
+      if (branches.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--text-muted);">No branches matched your search criteria.</div>`;
+        return;
+      }
+      branches.forEach(b => {
+        const card = document.createElement('div');
+        card.className = 'glass-card branch-card';
+        card.innerHTML = `
+          <div>
+            <div class="branch-header">
+              <span class="branch-tag">${b.district} District</span>
+              <i class="fas fa-building" style="color:var(--accent-gold);"></i>
+            </div>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">${b.name}</h3>
+            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:0.8rem;">
+              <i class="fas fa-tag"></i> ${b.sector}
+            </p>
+            <p style="font-size:0.88rem;"><i class="fas fa-user"></i> Leader: <strong>${b.leader}</strong></p>
+            <p style="font-size:0.88rem;"><i class="fas fa-phone"></i> Contact: ${b.phone}</p>
+          </div>
+          <button class="btn btn-outline" style="margin-top:1.2rem; padding:0.4rem 1rem; font-size:0.85rem;" onclick="copyText('${b.phone}')">
+            <i class="fas fa-phone-alt"></i> Contact Steward
+          </button>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    renderBranches(branchData);
+
+    // Filter Chips Event Listeners
+    document.querySelectorAll('#regionChips .chip-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('#regionChips .chip-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        filterBranches();
+      });
+    });
+
+    function filterBranches() {
+      const selectedRegion = document.querySelector('#regionChips .chip-btn.active').dataset.region;
+      const query = document.getElementById('branchSearchInput').value.toLowerCase();
+      
+      const filtered = branchData.filter(b => {
+        const matchesRegion = selectedRegion === 'all' || b.region === selectedRegion;
+        const matchesSearch = b.name.toLowerCase().includes(query) || b.district.toLowerCase().includes(query);
+        return matchesRegion && matchesSearch;
+      });
+      renderBranches(filtered);
+    }
+
+    // --- 9. Dues & Benefits Calculator ---
+    function calculateDues() {
+      const salary = parseFloat(document.getElementById('calcSalary').value) || 0;
+      const rate = 0.02; // 2.0%
+      const monthlyDue = Math.round(salary * rate);
+      
+      document.getElementById('dueAmount').textContent = 'UGX ' + monthlyDue.toLocaleString();
+      document.getElementById('dueRateText').textContent = `Based on standard 2.0% union rate for UGX ${salary.toLocaleString()} salary.`;
+    }
+    calculateDues();
+
+    // --- 10. Join Wizard & Live Digital ID Card ---
+    function goToStep(stepNum) {
+      document.querySelectorAll('.wizard-step').forEach(s => s.style.display = 'none');
+      document.getElementById('step' + stepNum).style.display = 'block';
+
+      document.querySelectorAll('.step-node').forEach((node, idx) => {
+        node.classList.remove('active', 'completed');
+        if (idx + 1 === stepNum) node.classList.add('active');
+        else if (idx + 1 < stepNum) node.classList.add('completed');
+      });
+    }
+
+    function updateIDCardPreview() {
+      const name = document.getElementById('mName').value || 'MUKASA JOHN BAPTIST';
+      const sector = document.getElementById('mSector').value;
+      const branch = document.getElementById('mBranch').value;
+      
+      document.getElementById('previewCardName').textContent = name.toUpperCase();
+      document.getElementById('previewCardSector').textContent = sector;
+      document.getElementById('previewCardBranch').textContent = branch.replace(' Branch', '');
+    }
+
+    function handleWizardSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.querySelector('#joinWizardForm button[type="submit"]');
+
+      apiPost('/api/membership', {
+        name: document.getElementById('mName').value,
+        nin: document.getElementById('mNIN').value,
+        phone: document.getElementById('mPhone').value,
+        sector: document.getElementById('mSector').value,
+        employer: document.getElementById('mEmployer').value,
+        branch: document.getElementById('mBranch').value
+      }, submitBtn).then(json => {
+        if (!json) return;
+        showToast(`🎉 Application submitted! Member ID: ${json.memberId}`, 'success');
+        printDigitalCard();
+        document.getElementById('joinWizardForm').reset();
+      });
+    }
+
+    function printDigitalCard() {
+      window.print();
+    }
+
+    // --- 11. Spotlight Global Search (Ctrl + K) ---
+    const searchModal = document.getElementById('searchModal');
+    const openSearchBtn = document.getElementById('openSearchBtn');
+    const globalSearchInput = document.getElementById('globalSearchInput');
+    const searchResultsList = document.getElementById('searchResultsList');
+
+    openSearchBtn.addEventListener('click', () => {
+      searchModal.classList.add('active');
+      globalSearchInput.focus();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchModal.classList.toggle('active');
+        if (searchModal.classList.contains('active')) globalSearchInput.focus();
+      } else if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+        searchModal.classList.remove('active');
+      }
+    });
+
+    const searchableItems = [
+      { title: "Home Overview & Leadership", page: "home", desc: "Executive administrators Nelson Wafana, 50+ branches." },
+      { title: "Historical Background & Legal Foundation", page: "about", desc: "Founding timeline of LUN 38 registered 29 Dec 2006." },
+      { title: "Report Workplace Dispute / Grievance", page: "grievance", desc: "Confidential dispute submission & tracking tickets." },
+      { title: "Document Library & PDF Downloads", page: "resources", desc: "UFABWU Constitution, CBA templates, and OSH guides." },
+      { title: "Member Welfare & SACCO Perks", page: "perks", desc: "Micro-loans, health insurance, and education bursaries." },
+      { title: "Upcoming Events & Rallies", page: "events", desc: "National Delegates Conference, Decent Work Rally RSVP." },
+      { title: "Branch Directory", page: "branches", desc: "Search Kampala, Jinja, Mbarara, Gulu, Mukono regional offices." },
+      { title: "Dues & Benefits Calculator", page: "calculator", desc: "Estimate monthly union fee and legal protection." },
+      { title: "Membership Digital ID Generator", page: "join", desc: "3-step registration wizard for farm workers." }
+    ];
+
+    function handleGlobalSearch() {
+      const q = globalSearchInput.value.toLowerCase().trim();
+      if (!q) {
+        searchResultsList.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding:2rem;">Type to search across the portal...</div>`;
+        return;
+      }
+
+      const matches = searchableItems.filter(item => 
+        item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q)
+      );
+
+      if (matches.length === 0) {
+        searchResultsList.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding:2rem;">No matching portal pages found.</div>`;
+        return;
+      }
+
+      searchResultsList.innerHTML = matches.map(m => `
+        <div class="search-result-item" onclick="navigateTo('${m.page}'); searchModal.classList.remove('active');">
+          <div>
+            <strong>${m.title}</strong>
+            <div style="font-size:0.85rem; color:var(--text-secondary);">${m.desc}</div>
+          </div>
+          <i class="fas fa-chevron-right" style="color:var(--accent-gold);"></i>
+        </div>
+      `).join('');
+    }
+
+    searchModal.addEventListener('click', (e) => {
+      if (e.target === searchModal) searchModal.classList.remove('active');
+    });
+
+    // --- 12. Count-Up Stats Animation ---
+    function animateCounters() {
+      const counters = document.querySelectorAll('.stat-number');
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-count');
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            counter.textContent = target >= 1000 ? target.toLocaleString() + '+' : target + (target === 50 ? '+' : '');
+            clearInterval(timer);
+          } else {
+            counter.textContent = Math.floor(current).toLocaleString();
+          }
+        }, 16);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounters();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsCard = document.querySelector('.hero-stats-card');
+    if (statsCard) observer.observe(statsCard);
+
+    // --- 13. Lightbox & News Modal ---
+    function openLightbox(imgSrc, title) {
+      const modal = document.getElementById('lightboxModal');
+      const img = document.getElementById('lightboxImg');
+      img.src = imgSrc;
+      modal.classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').classList.remove('active');
+    }
+
+    function openNewsModal(title, content) {
+      alert(`📰 ${title}\n\n${content}`);
+    }
+
+    function toggleAccordion(card) {
+      const answer = card.querySelector('.faq-answer');
+      const icon = card.querySelector('.fa-chevron-down, .fa-chevron-up');
+      if (answer.style.display === 'none' || !answer.style.display) {
+        answer.style.display = 'block';
+        if (icon) icon.className = 'fas fa-chevron-up';
+      } else {
+        answer.style.display = 'none';
+        if (icon) icon.className = 'fas fa-chevron-down';
+      }
+    }
+
+    // --- 14. Toast Helper ---
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<i class="fas fa-info-circle" style="color:var(--accent-gold);"></i> ${message}`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.remove();
+      }, 3500);
+    }
+
+    // --- 15. HERO SLIDER LOGIC ---
+    let currentHeroSlide = 0;
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroDots = document.querySelectorAll('.slider-dot');
+    let heroSliderTimer = null;
+
+    function goToHeroSlide(index) {
+      if (heroSlides.length === 0) return;
+      heroSlides[currentHeroSlide].classList.remove('active');
+      if (heroDots[currentHeroSlide]) heroDots[currentHeroSlide].classList.remove('active');
+
+      currentHeroSlide = (index + heroSlides.length) % heroSlides.length;
+
+      heroSlides[currentHeroSlide].classList.add('active');
+      if (heroDots[currentHeroSlide]) heroDots[currentHeroSlide].classList.add('active');
+    }
+
+    function changeHeroSlide(direction) {
+      goToHeroSlide(currentHeroSlide + direction);
+      resetHeroAutoSlider();
+    }
+
+    function startHeroAutoSlider() {
+      heroSliderTimer = setInterval(() => {
+        goToHeroSlide(currentHeroSlide + 1);
+      }, 5500);
+    }
+
+    function resetHeroAutoSlider() {
+      if (heroSliderTimer) clearInterval(heroSliderTimer);
+      startHeroAutoSlider();
+    }
+
+    startHeroAutoSlider();
+
+    // --- 16. VIDEO MODAL PLAYER ---
+    function openVideoModal(url, title) {
+      const backdrop = document.getElementById('videoModalBackdrop');
+      const iframe = document.getElementById('videoModalIframe');
+      const titleElem = document.getElementById('videoModalTitle');
+
+      if (titleElem) titleElem.textContent = title;
+      if (iframe) iframe.src = url + '?autoplay=1';
+      if (backdrop) backdrop.classList.add('active');
+    }
+
+    function closeVideoModal() {
+      const backdrop = document.getElementById('videoModalBackdrop');
+      const iframe = document.getElementById('videoModalIframe');
+      if (backdrop) backdrop.classList.remove('active');
+      if (iframe) iframe.src = '';
+    }
+
+    // --- 17. INTERACTIVE MAP BRANCH SELECTION ---
+    const mapBranchData = {
+      1: { name: "Kampala Central Secretariat", region: "Central Region HQ", sector: "Public Service & MAAIF Agency Coordination", address: "Komamboga, Gayaza Road, Kampala", leader: "Nelson Wafana Makwasi", phone: "+256 772 518902" },
+      2: { name: "Jinja Agro-Enterprise Branch", region: "Eastern Region Hub", sector: "Sugar Estate & Grain Processing", address: "Jinja Industrial Area, Main Street", leader: "Okello David", phone: "+256 701 443210" },
+      3: { name: "Mukono Plantation Branch", region: "Central Region Hub", sector: "Tea & Coffee Commercial Schemes", address: "Mukono Town Centre, Main Secretariat", leader: "Nalubega Sarah", phone: "+256 774 990123" },
+      4: { name: "Mbarara Western Branch", region: "Western Region Hub", sector: "Livestock & Commercial Dairy Farms", address: "Mbarara High Street, Western Office", leader: "Turyatemba Joseph", phone: "+256 782 119844" },
+      5: { name: "Gulu Agricultural Branch", region: "Northern Region Hub", sector: "Cereal & Produce Cooperatives", address: "Gulu Commercial Avenue", leader: "Akena Patrick", phone: "+256 773 665421" },
+      6: { name: "Arua West Nile Branch", region: "West Nile Region Hub", sector: "Produce & Commercial Enterprises", address: "Arua Municipal Secretariat", leader: "Draku Michael", phone: "+256 702 334988" }
+    };
+
+    function selectMapBranch(id) {
+      document.querySelectorAll('.map-pin').forEach(pin => pin.classList.remove('active'));
+      const activePin = document.getElementById('pin' + (id === 1 ? 'Kampala' : id === 2 ? 'Jinja' : id === 3 ? 'Mukono' : id === 4 ? 'Mbarara' : id === 5 ? 'Gulu' : 'Arua'));
+      if (activePin) activePin.classList.add('active');
+
+      const data = mapBranchData[id];
+      if (data) {
+        document.getElementById('mapBranchTitle').textContent = data.name;
+        document.getElementById('mapBranchRegionBadge').textContent = data.region;
+        document.getElementById('mapBranchSector').textContent = data.sector;
+        document.getElementById('mapBranchAddress').textContent = data.address;
+        document.getElementById('mapBranchLeader').textContent = data.leader;
+        document.getElementById('mapBranchPhone').textContent = data.phone;
+        document.getElementById('mapBranchCallBtn').setAttribute('onclick', `copyText('${data.phone}')`);
+      }
+    }
+
+    // --- 18. NEWSLETTER SUBMISSION ---
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('nlEmail').value;
+      const submitBtn = document.querySelector('#newsletterForm button[type="submit"]');
+
+      apiPost('/api/newsletter', {
+        email,
+        sector: document.getElementById('nlSector').value
+      }, submitBtn).then(json => {
+        if (!json) return;
+        showToast(`🎉 Subscribed successfully! Updates sent to ${email}`, 'success');
+        document.getElementById('newsletterForm').reset();
+      });
+    }
+  </script>
+</body>
+</html>
