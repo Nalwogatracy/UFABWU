@@ -1,6 +1,6 @@
 {
   "name": "ufabwu-website",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "UFABWU enterprise portal backend - contact, newsletter, grievance tickets and membership ID cards. Deployable to Vercel with a Turso cloud database.",
   "main": "server.js",
   "scripts": {
