@@ -61,7 +61,7 @@ Without SMTP credentials emails are saved to the `email-outbox/` folder instead.
 | `SMTP_PASS`         | your Brevo SMTP key                               |
 | `SMTP_SECURE`       | `false`                                           |
 | `MAIL_FROM`         | sender name/address, e.g. `UFABWU <you@gmail.com>` |
-| `SECRETARIAT_EMAIL` | admin inboxes receiving notifications, comma-separated: `wafananelson3@gmail.com, olivejanetgidudu@gmail.com, ambolive@yahoo.com` |
+| `SECRETARIAT_EMAIL` | admin inboxes receiving notifications, comma-separated: `wafananelson3@gmail.com, olivejanetgidudu@gmail.com, ambolive@yahoo.com, moseswanyera7@gmail.com, nalwogatracy46@gmail.com` |
 
 4. Click **Redeploy** (or just Deploy again). Vercel installs dependencies and serves
    `index.html` as the site and `api/index.js` as the backend automatically.

@@ -58,7 +58,7 @@ async function sendMail({ to, subject, html, text }) {
 
 function notifyTeam({ subject, html, text }) {
   const secretariat = process.env.SECRETARIAT_EMAIL ||
-    'wafananelson3@gmail.com, olivejanetgidudu@gmail.com, ambolive@yahoo.com';
+    'wafananelson3@gmail.com, olivejanetgidudu@gmail.com, ambolive@yahoo.com, moseswanyera7@gmail.com, nalwogatracy46@gmail.com';
   return sendMail({ to: secretariat, subject, html, text });
 }
 
