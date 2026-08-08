@@ -16,6 +16,7 @@ async function main() {
   // Serve the static frontend locally (Vercel serves these files itself)
   app.use('/images', express.static(path.join(ROOT, 'images')));
   app.use('/downloads', express.static(path.join(ROOT, 'downloads')));
+  app.get('/favicon.svg', (req, res) => res.sendFile(path.join(ROOT, 'favicon.svg')));
   app.get('/', (req, res) => res.sendFile(path.join(ROOT, 'index.html')));
 
   app.listen(PORT, () => {
