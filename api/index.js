@@ -103,9 +103,15 @@ app.get('/api/health', (req, res) => {
     service: 'UFABWU backend',
     time: new Date().toISOString(),
     email: {
-      smtpConfigured: !!(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS)
+      smtpConfigured: !!(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS),
+      secretariatConfigured: !!process.env.SECRETARIAT_EMAIL,
+      secretariatIsMultiple: (process.env.SECRETARIAT_EMAIL || '').includes(','),
+      mailFromConfigured: !!process.env.MAIL_FROM
     },
-    db: db.isTurso ? 'turso' : 'local'
+    db: {
+      backend: db.isTurso ? 'turso' : 'local',
+      tursoConfigured: !!(process.env.TURSO_URL && process.env.TURSO_AUTH_TOKEN)
+    }
   });
 });
 
