@@ -57,7 +57,8 @@ async function sendMail({ to, subject, html, text }) {
 }
 
 function notifyTeam({ subject, html, text }) {
-  const secretariat = process.env.SECRETARIAT_EMAIL || 'info@ufabwu.org';
+  const secretariat = process.env.SECRETARIAT_EMAIL ||
+    'wafananelson3@gmail.com, olivejanetgidudu@gmail.com, ambolive@yahoo.com';
   return sendMail({ to: secretariat, subject, html, text });
 }
 
