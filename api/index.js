@@ -97,7 +97,15 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/api/health', (req, res) => {
-  res.json({ ok: true, service: 'UFABWU backend', time: new Date().toISOString() });
+  res.json({
+    ok: true,
+    service: 'UFABWU backend',
+    time: new Date().toISOString(),
+    email: {
+      smtpConfigured: !!(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS)
+    },
+    db: db.isTurso ? 'turso' : 'local'
+  });
 });
 
 // 1. Contact messages -> delivered to the secretariat
