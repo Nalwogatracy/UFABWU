@@ -2380,7 +2380,7 @@
             </div>
 
             <div style="margin-top: 2rem;">
-              <button class="btn btn-primary" style="width: 100%;" id="mapBranchCallBtn" onclick="copyText('+256772518902')">
+              <button class="btn btn-primary" style="width: 100%;" id="mapBranchCallBtn" onclick="contactSteward('+256772518902')">
                 <i class="fas fa-phone-alt"></i> Contact Branch Steward
               </button>
             </div>
@@ -3623,7 +3623,7 @@
             <p style="font-size:0.88rem;"><i class="fas fa-user"></i> Leader: <strong>${b.leader}</strong></p>
             <p style="font-size:0.88rem;"><i class="fas fa-phone"></i> Contact: ${b.phone}</p>
           </div>
-          <button class="btn btn-outline" style="margin-top:1.2rem; padding:0.4rem 1rem; font-size:0.85rem;" onclick="copyText('${b.phone}')">
+          <button class="btn btn-outline" style="margin-top:1.2rem; padding:0.4rem 1rem; font-size:0.85rem;" onclick="contactSteward('${b.phone}')">
             <i class="fas fa-phone-alt"></i> Contact Steward
           </button>
         `;
@@ -3845,6 +3845,57 @@
       }, 3500);
     }
 
+    // --- PHONE CONTACT HELPERS ---
+    function copyText(text) {
+      const done = () => showToast(`📋 ${text} copied to clipboard`, 'success');
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+      } else {
+        fallbackCopy(text, done);
+      }
+    }
+
+    function fallbackCopy(text, done) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
+
+    function contactSteward(phone) {
+      const tel = String(phone).replace(/[^\d+]/g, '');
+      const wa = String(phone).replace(/[^\d]/g, '');
+      const btnStyle = 'display:flex; align-items:center; justify-content:center; gap:.6rem; width:100%; padding:.8rem; border-radius:10px; font-size:.95rem; font-weight:600; cursor:pointer; text-decoration:none; border:none; transition:opacity .15s;';
+      const overlay = document.createElement('div');
+      overlay.id = 'stewardMenuOverlay';
+      overlay.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:99999; display:flex; align-items:center; justify-content:center; padding:1rem;';
+      overlay.onclick = closeStewardMenu;
+      overlay.innerHTML = `
+        <div style="background:var(--bg-surface,#fff); border-radius:16px; padding:1.5rem; width:100%; max-width:320px; box-shadow:0 20px 60px rgba(0,0,0,.35);" onclick="event.stopPropagation()">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.4rem;">
+            <strong style="color:var(--text-primary,#111); font-size:1.05rem;">Contact Steward</strong>
+            <button onclick="closeStewardMenu()" style="border:none; background:none; font-size:1.3rem; cursor:pointer; color:var(--text-muted,#888); line-height:1;">✕</button>
+          </div>
+          <p style="color:var(--text-secondary,#555); font-size:.95rem; margin-bottom:1.1rem;">${phone}</p>
+          <div style="display:flex; flex-direction:column; gap:.7rem;">
+            <a href="tel:${tel}" style="${btnStyle} background:#16a34a; color:#fff;" onclick="closeStewardMenu()"><i class="fas fa-phone-alt"></i> Call Now</a>
+            <a href="https://wa.me/${wa}" target="_blank" rel="noopener" style="${btnStyle} background:#25d366; color:#fff;" onclick="closeStewardMenu()"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <button onclick="copyText('${phone}'); closeStewardMenu();" style="${btnStyle} background:var(--bg-card,#eef2f6); color:var(--text-primary,#111); border:1px solid var(--border-subtle,#ddd);"><i class="fas fa-copy"></i> Copy Number</button>
+          </div>
+        </div>`;
+      document.body.appendChild(overlay);
+    }
+
+    function closeStewardMenu() {
+      const el = document.getElementById('stewardMenuOverlay');
+      if (el) el.remove();
+    }
+
     // --- 15. HERO SLIDER LOGIC ---
     let currentHeroSlide = 0;
     const heroSlides = document.querySelectorAll('.hero-slide');
@@ -3921,7 +3972,7 @@
         document.getElementById('mapBranchAddress').textContent = data.address;
         document.getElementById('mapBranchLeader').textContent = data.leader;
         document.getElementById('mapBranchPhone').textContent = data.phone;
-        document.getElementById('mapBranchCallBtn').setAttribute('onclick', `copyText('${data.phone}')`);
+        document.getElementById('mapBranchCallBtn').setAttribute('onclick', `contactSteward('${data.phone}')`);
       }
     }
 
